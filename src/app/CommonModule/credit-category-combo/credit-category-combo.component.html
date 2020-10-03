@@ -1,0 +1,6 @@
+<ng-content></ng-content>
+<kendo-combobox [data]="dataCreditCategory" [textField]="'name'"
+[valueField]="'id'" [filterable]="true" [(ngModel)]="value"
+(filterChange)="handleFilterCreditCategories($event)"
+[placeholder]="'نام گروه'">
+ </kendo-combobox>

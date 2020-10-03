@@ -1,0 +1,7 @@
+.form-control[disabled]{
+  background-color: white
+}
+
+.spanSmall{
+  font-weight: 700;
+}

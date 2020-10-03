@@ -1,0 +1,117 @@
+.grid-wrapper {
+  position: relative;
+}
+.k-i-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 64px;
+  /* background-color: rgba(255,255,255,.3); */
+  color: #ff6757;
+}
+
+.classActiveRequest{
+  color: green;
+  animation: colorActiveChange 5s;
+  font-weight: 800;
+}
+ 
+@keyframes colorActiveChange
+{
+  0%   {color: rgb(99, 243, 16);font-weight: 500;font-size: 12px}
+  25%  {color: #03d353;font-weight: 600;font-size: 13px}
+  50%  {color: rgb(2, 49, 11);font-weight: 700;font-size: 14px}
+  75%  {color: green;font-weight: 800;font-size: 13px}
+  100% {color: green;font-weight: 900;font-size: 13px}
+}
+
+
+.classSupplement{
+  color:#73880c;;
+  animation: colorSupplemenChange 5s;
+  font-weight: 800;
+}
+@keyframes colorSupplemenChange
+{
+  0%   {color: #73880c;font-weight: 500;font-size: 12px}
+  25%  {color: #7a910b;font-weight: 600;font-size: 13px}
+  50%  {color: #859b1b;font-weight: 700;font-size: 14px}
+  75%  {color: #7f960c;font-weight: 800;font-size: 13px}
+  100% {color: #73880c;font-weight: 900;font-size: 13px}
+}
+
+
+.classSentRequest{
+  color: rgb(14, 99, 168);
+  animation: colorSentChange 5s;
+  font-weight: 800;
+}
+ 
+@keyframes colorSentChange
+{
+  0%   {color: rgb(30, 183, 221);font-weight: 500;font-size: 12px}
+  25%  {color: #204ddf;font-weight: 600;font-size: 13px}
+  50%  {color: rgb(17, 29, 189);font-weight: 700;font-size: 14px}
+  75%  {color: rgb(16, 35, 143);font-weight: 800;font-size: 13px}
+  100% {color: rgb(36, 108, 167);font-weight: 900;font-size: 13px}
+}
+
+.classRejectRequest{
+  color: rgb(151, 25, 3);
+  animation: colorRejectRequest 5s;
+  font-weight: 800;
+}
+ 
+@keyframes colorRejectRequest
+{
+  0%   {color: rgb(219, 114, 15);font-weight: 500;font-size: 12px}
+  25%  {color: #da4936;font-weight: 600;font-size: 13px}
+  50%  {color: rgb(187, 56, 56);font-weight: 700;font-size: 14px}
+  75%  {color: rgb(129, 34, 18);font-weight: 800;font-size: 13px}
+  100% {color: rgb(207, 37, 7);font-weight: 900;font-size: 13px}
+}
+
+.classWaitFinallAcceptRequest{
+  color: rgb(0, 136, 106);
+  animation: colorWaitFinallAcceptRequest 5s;
+  font-weight: 800;
+}
+
+@keyframes colorWaitFinallAcceptRequest
+{
+  0%   {color: rgb(0, 136, 106);font-weight: 500;font-size: 12px}
+  25%  {color: rgb(14, 136, 110);font-weight: 600;font-size: 13px}
+  50%  {color: rgb(17, 114, 93);font-weight: 700;font-size: 14px}
+  75%  {color: rgb(11, 104, 84);font-weight: 800;font-size: 13px}
+  100% {color: rgb(0, 136, 106);font-weight: 900;font-size: 13px}
+}
+
+.classInProgressRequest{
+  color: rgb(187, 171, 29);
+  animation: colorInProgressRequest 5s;
+  font-weight: 800;
+}
+
+@keyframes colorInProgressRequest
+{
+  0%   {color: rgb(197, 183, 51);font-weight: 500;font-size: 12px}
+  25%  {color: rgb(182, 167, 33);font-weight: 600;font-size: 13px}
+  50%  {color: rgb(187, 171, 29);font-weight: 700;font-size: 14px}
+  75%  {color: rgb(190, 179, 78);font-weight: 800;font-size: 13px}
+  100% {color: rgb(224, 205, 33);font-weight: 900;font-size: 13px}
+}
+
+.dialog-Btn {
+  margin: 2px;
+}
+
+
+.btnBlack{
+  background: black !important
+}
+
+.disActive{
+  pointer-events: none;
+}

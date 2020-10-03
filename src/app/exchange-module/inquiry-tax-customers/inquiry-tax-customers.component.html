@@ -1,0 +1,67 @@
+<app-slid-in-out
+*ngIf="_collectionControls?.length>0"
+class="popup"
+
+>
+<app-show-result-info  [collection]="_collectionControls" ></app-show-result-info >
+
+
+</app-slid-in-out>
+
+
+
+
+<aside class="profile-card"  [ngClass]="{ 'fullscreen-inActive': state }"  *ngIf="!(_collectionControls?.length>0)" >
+<header>
+  <!-- here’s the avatar -->
+  <a  >
+    <img src="../../../assets/image/search.jpg"  class="hoverZoomLink">
+  </a>
+
+  <form class="container" [formGroup]="requestForm" class="simple-form"  (ngSubmit)="inquiryTaxInfo()">
+
+    <table width="100%">
+
+        <tr style="vertical-align: bottom">
+            <td>
+                    <label> شناسه ملی :</label>
+                <div class="input-group">
+
+                    <input type='text'  [imask]="{mask: '00000000000000'}" [(ngModel)]="inquiryTax.nationalCode" class="form-control" formControlName="nationalCode"
+                      class="form-control" />
+                </div>
+                <div *ngIf="submitted && ctrl.nationalCode.errors" class="invalid-feedback">
+                         <div *ngIf="submitted && ctrl.nationalCode.errors.required" class="fontColorError">فیلد شناسه ملی الزامی است</div>
+                 </div>
+            </td>
+            <td>
+                <div>
+                    <input *ngIf="requestForm.valid"    type="checkbox"  checked=""   />
+                    <input *ngIf="!requestForm.valid"  type="checkbox"     />
+
+                    <span></span>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <a
+                (click)="inquiryTaxInfo()"
+                [ngClass]="{'m-progress':sendDataToServer}"
+                class="btn btn-success btn-block btn-lg"  >استعلام</a>
+            </td>
+        </tr>
+    </table>
+
+        </form>
+
+</header>
+
+
+
+
+
+</aside>
+
+

@@ -1,0 +1,110 @@
+
+
+
+
+
+
+<div
+class="example-wrapper container-fluid screen-Active"
+style="height: 100%; width: 100%;padding-left: 0px;padding-right: 0px">
+<div
+    class="row"
+    class="screen-Active"
+    style="height: 100%; width: 100%;margin: 0"
+>
+    <div class="col-xs-12 col-sm-12 example-col" class=" holderbig panelbar-wrapper">
+        <app-close-side-nav></app-close-side-nav>
+        <kendo-tabstrip
+             >
+            <kendo-tabstrip-tab
+                [title]="'مدیریت درخواست'"
+                [selected]="true">
+                <ng-template kendoTabContent>
+                    <div 
+                        class="card text-secondary mb-12"
+                        style="  overflow: auto; height: 100vh;" > 
+
+                        <div class="card-header  " >
+                            <div class="row display-tr">
+                                <h3 class="panel-title text-secondary display-tdhead myOrginalFont">
+                                        {{headerTitle}}  
+                                </h3>
+                                <div class="display-td"></div>
+                            </div>
+                        </div>
+
+
+                    <div class="card-body myOrginalFont"   >
+                      <div class="card-body myOrginalFont"    *ngIf="pageIndex==0"  >
+
+                       <form  [formGroup]="requestForm" class="simple-form"  (keyup.enter)="onNextPage()">
+          
+
+                            <div  class="row" *ngIf="this.operationType==operationTypeEnumAdd "
+                             [ngClass]="{'blur': sendDataToServer || isInquiryOfRequest}">
+
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="display: inline-block;">
+                                    <label class="k-radio-label" for="radio3" style="width: 30%;display: inline-block;">  شناسه یکتا موکل </label>
+                                <input type='text'   [imask]="{mask:maskTxt }"    class="form-control numberDirection" formControlName="customerCode"  required
+                                type="text" [(ngModel)]="initialParameter.nationalCode"    [attr.disabled]="mode === 'edit' ? '' : null" style="width: 70%;display: inline-block;" >
+                                    
+
+                                    <div *ngIf="submitted && ctrl.customerCode.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && ctrl.customerCode.errors.required" class="fontColorError">فیلد شناسه وکیل الزامی است</div>
+
+                                        <div *ngIf="ctrl.customerCode.errors.minlength">
+                                            شناسه باید {{this.nationalCodeLength}} کاراکتر باشد
+                                          </div>
+
+                                 </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                <a
+                                (click)="onNextPage()"
+                                [ngClass]="{'m-progress':sendDataToServer  ,'not-active': !requestForm.valid}"
+                                class="btn btn-success btn-lg btn-block text-dark">  
+                                شروع
+                            </a>
+
+                        </div>
+
+                            </div >
+ 
+
+                        </form>  
+                      </div>
+
+                      <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==1">
+                        <ngx-attorney-basic-information  (clickedNext)="onNextPage()" [attorneyRequest]="this.attorneyRequest"   (clickedPrevious)="onPerviousPage()" ></ngx-attorney-basic-information>
+                    </div>
+
+                    <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==2">
+                      <app-address-details [isViewMode]="isViewMode"   (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.attorneyRequest.addressDetails"  >  </app-address-details>
+
+                    </div>
+
+
+                    <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==3">
+                      <ngx-power-of-attorney (needToUpdate)="updateResult($event)"  [isViewMode]="isViewMode"  (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [attorneyRequest]="this.attorneyRequest" [operationType]="this.operationType"  >  </ngx-power-of-attorney>
+
+                    </div>
+
+
+                    </div>
+
+                    </div>
+
+
+                    
+
+                </ng-template>
+            </kendo-tabstrip-tab>
+        </kendo-tabstrip>
+    </div>
+</div>
+</div>
+
+
+
+

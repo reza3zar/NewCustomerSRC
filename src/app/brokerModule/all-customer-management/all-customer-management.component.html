@@ -1,0 +1,207 @@
+
+
+
+<app-slid-in-out
+*ngIf="typeOpereation === 'new'"
+class="popup"
+[bgColour]="mybg"
+>
+</app-slid-in-out>
+
+<app-slid-in-out
+*ngIf="typeOpereation === 'showDetail'"
+class="popup"
+[bgColour]="mybg"
+>
+</app-slid-in-out>
+
+<app-slid-in-out
+*ngIf="typeOpereation === 'addNewRequest'"
+class="popup"
+[bgColour]="mybg"
+>
+<app-create-request
+  (saveRequestOccurred)="updateRequests($event)"  (clickedSaveRequest)="SaveRequestsFake($event)" (clickedCustomerType)="SetCustomerType($event)"
+></app-create-request>
+</app-slid-in-out>
+
+<div [ngClass]="{ 'fullscreen-inActive': state }">
+<kendo-grid
+    [data]="gridData"
+    (cellClick)="onCellClick($event)"
+    [resizable]="true"
+    [sortable]="{ mode: 'multiple' }"
+    [selectable]="{ mode: 'single' }"
+    (selectionChange)="selected($event)"
+    (sortChange)="sortChange($event)"
+    [sortable]="{
+        allowUnsort: true,
+        mode: 'multiple'
+    }"
+    [sort]="sort"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [filter]="filter"
+    (filterChange)="filterChange($event)"
+    [filterable]="true"
+    (pageChange)="pageChange($event)"
+    [height]="815"
+    (scrollBottom)="loadMore()">
+    <kendo-grid-messages
+        noRecords="رکوردی برای نمایش یافت نشد!"
+        pagerItems="کل رکورد"
+        pagerOf="از"
+        sortAscending="صعودی"
+        sortDescending="نزولی"
+        filter="جستجو"
+        columns="انتخاب سر ستون"
+        columnsApply="اعمال"
+        columnsReset="باز نشانی"
+    >
+    </kendo-grid-messages>
+    <ng-template kendoGridToolbarTemplate>
+        <button
+            class="k-button"
+            (click)="createNewRequest()"
+            kendoButton
+   
+            type="button"
+        >
+        ایجاد
+        </button>
+        <button
+            (click)="showDetails()"
+            [disabled]="disableShowBtn"
+            kendoButton
+            type="button"
+        >
+            نمایش جزئیات
+        </button>
+
+
+        <button
+        (click)="refreshAllRequest()"
+        kendoButton
+        type="button"
+    >
+        به روز رسانی
+    </button>
+
+        <button
+            type="button"
+            kendoButton
+            kendoGridExcelCommand
+            style="margin-left: 2px;margin-right: 2px"
+        >
+            خروجی به اکسل
+        </button>
+        
+        <button style="background: #d7cdcd;"   kendoButton type="button k-primary">
+            تعداد {{ pageSize }} از{{totalCount}} رکورد
+        </button>
+    </ng-template>
+
+    <kendo-grid-column
+        field="id"
+        title=" شناسه مشتری "
+        width="120"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+        field="name"
+        title="نـــام"
+        width="180"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <!-- <kendo-grid-column
+    field="nationality.name"
+    title="ملیت"
+    width="120"
+    [filterable]="true">
+</kendo-grid-column> -->
+
+    <kendo-grid-column
+        field="customerType.name"
+        title="نوع مشتری"
+        width="110"
+        [filterable]="true">
+    </kendo-grid-column>
+
+    <kendo-grid-column
+    field="externalId"
+    title="شناسه یکتا"
+    width="120"
+    [filterable]="true">
+  </kendo-grid-column>
+
+  <kendo-grid-column
+  field="spotCode"
+  title="شناسه بازار نقدی"
+  width="120"
+  [filterable]="true">
+</kendo-grid-column>
+
+<kendo-grid-column
+field="derivativeCode"
+title="شناسه بازار مشتقه"
+width="120"
+[filterable]="true">
+</kendo-grid-column>
+
+<kendo-grid-column
+field="auctionCode"
+title="شناسه نقدی قدیمی"
+width="120"
+[filterable]="true">
+</kendo-grid-column>
+
+    <kendo-grid-column
+        field="economicNo"
+        title="کد اقتصادی"
+        width="120"
+        [filterable]="true">
+    </kendo-grid-column>
+    
+    <kendo-grid-column
+        field="createDate"
+        title="زمان ایجاد "
+        width="160"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+    field="updateDate"
+    title="زمان ویرایش "
+    width="160"
+    [filterable]="true"
+>
+</kendo-grid-column>
+
+ 
+
+    <kendo-grid-column field="customerStatus.name" title="وضعیت فعال بودن" width="90"  [filterable]="false">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span >
+                        {{ dataItem.customerStatus.name }}
+                    </span>
+                </ng-template>
+    </kendo-grid-column>
+ 
+    
+    <kendo-grid-excel
+        fileName="request.xlsx"
+        [fetchData]="allData"
+    ></kendo-grid-excel>
+</kendo-grid>
+
+<div *ngIf="loadingGrid" class="k-i-loading"></div>
+
+
+</div>
+
+ 

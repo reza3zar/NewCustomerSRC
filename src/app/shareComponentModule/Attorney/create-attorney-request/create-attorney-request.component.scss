@@ -1,0 +1,14 @@
+.screen-Active {
+    background:whitesmoke;
+    overflow: auto;
+    pointer-events: auto;
+    position: absolute;
+    touch-action: auto;
+    will-change: initial;
+    z-index: 99999999;
+    opacity: 1.0; /* in FireFox */
+    filter: alpha(opacity=100); /* in IE */
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 1.5em rgba(85,85,85,.5);
+  }

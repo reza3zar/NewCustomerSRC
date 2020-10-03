@@ -1,0 +1,77 @@
+<app-slid-in-out
+    *ngIf="_collectionControls?.length>0"
+    class="popup"
+
+>
+<app-show-result-info  [collection]="_collectionControls" ></app-show-result-info >
+
+
+</app-slid-in-out>
+<!-- *ngIf="typeOpereation==='showInquiry'" -->
+<!-- style="background-color: #fbfbfb;" -->
+
+
+
+<!-- <div class="col-12"  *ngIf="!(_collectionControls?.length>0) && formIsLoaded">
+    <div class="loading">
+      <div class="js-loading-indicator triple"></div>
+    </div>
+  </div> -->
+
+
+
+
+  <aside class="profile-card"  [ngClass]="{ 'fullscreen-inActive': state }"  *ngIf="!(_collectionControls?.length>0)" >
+    <header>
+      <!-- here’s the avatar -->
+      <a  >
+        <img src="../../../assets/image/search.jpg"  class="hoverZoomLink">
+      </a>
+
+      <form class="container" [formGroup]="requestForm" class="simple-form"  (ngSubmit)="inquiryTaxInfo()">
+
+        <table width="100%">
+
+            <tr style="vertical-align: bottom">
+                <td>
+                        <label> شناسه فیدا:</label>
+                    <div class="input-group">
+
+                        <input type='text'  [imask]="{mask: '00000000000000'}" [(ngModel)]="fidaoModel.stringFidaId" class="form-control" formControlName="fidaCode"
+                          class="form-control" />
+                    </div>
+                    <div *ngIf="submitted && ctrl.fidaCode.errors" class="invalid-feedback">
+                             <div *ngIf="submitted && ctrl.fidaCode.errors.required" class="fontColorError">فیلد کد فیدا الزامی است</div>
+                     </div>
+                </td>
+                <td>
+                    <div>
+                        <input *ngIf="requestForm.valid"    type="checkbox"  checked=""   />
+                        <input *ngIf="!requestForm.valid"  type="checkbox"     />
+
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <a
+                    (click)="inquiryTaxInfo()"
+                    [ngClass]="{'m-progress':sendDataToServer}"
+                        class="btn btn-success btn-block btn-lg"  >استعلام</a>
+                </td>
+            </tr>
+        </table>
+
+            </form>
+
+    </header>
+
+    <!-- bit of a bio; who are you? -->
+
+
+
+  </aside>
+
+

@@ -1,0 +1,224 @@
+
+
+ 
+
+<div [ngClass]="{ 'fullscreen-inActive': state }">
+<kendo-grid
+    [data]="gridData"
+    (cellClick)="onCellClick($event)"
+    [resizable]="true"
+    [sortable]="{ mode: 'multiple' }"
+    [selectable]="{ mode: 'single' }"
+    (selectionChange)="selected($event)"
+    (sortChange)="sortChange($event)"
+    [sortable]="{
+        allowUnsort: true,
+        mode: 'multiple'
+    }"
+    [sort]="sort"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [filter]="filter"
+    (filterChange)="filterChange($event)"
+    [filterable]="true"
+    (pageChange)="pageChange($event)"
+    [height]="815"
+    (scrollBottom)="loadMore()">
+    <kendo-grid-messages
+        noRecords="رکوردی برای نمایش یافت نشد!"
+        pagerItems="کل رکورد"
+        pagerOf="از"
+        sortAscending="صعودی"
+        sortDescending="نزولی"
+        filter="جستجو"
+        columns="انتخاب سر ستون"
+        columnsApply="اعمال"
+        columnsReset="باز نشانی"
+    >
+    </kendo-grid-messages>
+    <ng-template kendoGridToolbarTemplate>
+            <a
+            (click)="refreshAllRequest()"
+            class="buttoFlat"
+            type="button">
+            <img    src="../../../../assets/images/loop.png" width="24">
+                به روز رسانی
+            </a>
+        
+        <a  class="buttoFlat" style="margin-right: 2px" type="button">
+          <img    src="../../../../assets/images/transfer.png" width="24">
+            تعداد {{totalCount  }} از{{pageSize}} رکورد
+        </a>
+    </ng-template>
+
+    <kendo-grid-column
+        field="id"
+        title=" شناسه مشتری "
+        width="80"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+        field="name"
+        title="نـــام"
+        width="180"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+    field="customerType.name"
+    title="نوع مشتری"
+    width="100"
+    [filterable]="true">
+</kendo-grid-column>
+ 
+
+   
+
+    <kendo-grid-column
+    field="externalId"
+    title="شناسه یکتا"
+    width="120"
+    [filterable]="true">
+  </kendo-grid-column>
+
+  <!-- <kendo-grid-column
+  field="economicNo"
+  title="کد اقتصادی"
+  width="120"
+  [filterable]="true">
+</kendo-grid-column> -->
+
+  <kendo-grid-column
+  field="spotCode"
+  title="شناسه بازار نقدی"
+  width="120"
+  [filterable]="true">
+</kendo-grid-column>
+
+<kendo-grid-column
+field="derivativeCode"
+title="شناسه بازار مشتقه"
+width="120"
+[filterable]="true">
+</kendo-grid-column>
+
+<kendo-grid-column
+field="auctionCode"
+title="کد قدیمی"
+width="120"
+media="(min-width: 1650px)"
+[filterable]="true">
+</kendo-grid-column>
+
+<kendo-grid-column field="spotMarket" title="نقدی" width="90"     [filterable]="false">
+  <ng-template kendoGridCellTemplate let-dataItem>
+      <input type="checkbox" class="option-input checkbox" [checked]="dataItem.spotMarket" disabled/>
+  </ng-template>
+</kendo-grid-column>
+
+<kendo-grid-column field="derivativesMarket" title="مشتقه" width="90"    [filterable]="false">
+      <ng-template kendoGridCellTemplate let-dataItem>
+          <input type="checkbox" class="option-input checkbox"  [checked]="dataItem.derivativesMarket" disabled/>
+      </ng-template>
+</kendo-grid-column>
+
+    <kendo-grid-column field="عملیات" width="155" [filterable]="false">
+      <ng-template kendoGridCellTemplate let-dataItem>
+          <div class="row" style="margin-right: 1px " kendoTooltip>
+
+              <!-- <div class="buttons">
+                <button   (click)="refreshAllRequest()"  [disabled]="checkIsSelectedRow(dataItem.id)" class="pulse">انتقال اطلاعات به سامانه‌ها
+                  <img    src="../../../../assets/images/send.png" width="32">
+                </button>
+                
+                <span [ngClass]="{'spinner-grow spinner-grow-sm':historyInProgress  &&  !checkIsSelectedRow(dataItem.id)}"   ></span>
+              </div> -->
+
+              <!-- <div class="btn">
+                <div class="btn-back">
+                  <p>آیا از انتقال مطمئن می‌باشید</p>
+                  <button class="yes">بلی</button>
+                  <button class="no">خیر</button>
+                </div>
+                <div class="btn-front"    [ngClass]="{'m-progress':sendDataToServer}" (click)="sendRequest()">انتقال اطلاعات به سامانه‌ها
+                  
+                  <img    src="../../../../assets/images/send.png" width="32">
+                </div>
+              </div> -->
+
+
+              
+              <button [ngClass]="{'active': (selectedRequestItemResult?.id==dataItem.id),'not-active':!(selectedRequestItemResult?.id==dataItem.id)}"
+              nbTooltip="ارسال" nbTooltipStatus="success"
+              type="button"
+              nbButton  outline
+              status="success"
+              (click)="openConfirmSendRequestModal()"
+              class="btn btn-success  btn-circle btnBlack"
+               >
+              <i class="fa fa-paper-plane"></i>
+          </button>
+
+          <button [ngClass]="{'active': (selectedRequestItemResult?.id==dataItem.id),'not-active':!(selectedRequestItemResult?.id==dataItem.id)}"
+          nbTooltip="به روزرسانی کدها" nbTooltipStatus="warning"
+          type="button"
+          nbButton  outline
+          status="warning"
+          (click)="openConfirmSendRequestModal()"
+          class="btn btn-success  btn-circle btnBlack"
+           >
+          <i class="fa fa-spinner"></i>
+      </button>
+          
+
+          </div>
+
+
+          <ng-template
+              kendoPagerTemplate
+              let-totalPages="totalPages"
+              let-currentPage="currentPage">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                  [buttonCount]="12"
+              ></kendo-pager-numeric-buttons>
+              <kendo-pager-info></kendo-pager-info>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+              <kendo-pager-page-sizes
+                  [pageSizes]="[12, 120, 240]"
+              ></kendo-pager-page-sizes>
+          </ng-template>
+      </ng-template>
+  </kendo-grid-column>
+    
+    <kendo-grid-excel
+        fileName="request.xlsx"
+        [fetchData]="allData"
+    ></kendo-grid-excel>
+</kendo-grid>
+
+<div *ngIf="loadingGrid" class="k-i-loading"></div>
+
+
+<div class="row">
+  <modal #sendModal  >
+      <modal-header >
+              <h3  class="myOrginalFont"><nb-icon status="basic" icon="alert-triangle-outline"></nb-icon>  هشـــدار</h3>
+      </modal-header>
+      <modal-content>
+            آیا از ارسال درخواست مطمئن می باشید؟
+      </modal-content>
+      <modal-footer> 
+          <button nbButton status="success" class="myOrginalFont dialog-Btn " [ngClass]="{'m-progress':sendDataToServer}" (click)="sendRequest()" >تایید<nb-icon icon="done-all-outline"></nb-icon></button>
+           <button nbButton  status="danger" style="margin: 4px;" (click)="closeModal()" class="myOrginalFont dialog-Btn">انصراف<nb-icon icon="close-outline"></nb-icon></button>
+      </modal-footer>
+  </modal>
+</div>
+
+
+</div>
+
+ 

@@ -1,0 +1,36 @@
+
+
+    <div class="window-margin myOrginalFont">
+        <div class="window">
+            <aside class="sidebar">
+                <menu class="menu" style="padding: 0px !important">
+                        <ng-container *ngIf="menuIsLoad">
+                        <ul   style="direction: ltr;padding:0px" *ngFor="let cat of categories; let i = index" >
+                                <li id={{i}}     [class.active]="i ===  selectedRow" (click)="setClickedRow(i)"><a class="changea"   (click)="setClickedRow(i)" (click)="onNavigate(cat)"   >{{cat?.name}}</a></li>
+
+                            </ul>
+                            <div class="separator"></div>
+
+                            <ul   style="direction: ltr;padding:0px" >
+                                    <li><a (click)="logOff()"  class="changea ">خروج</a></li>
+                            </ul>
+
+                        </ng-container>
+                            <ng-container *ngIf="!menuIsLoad ">
+                                    <div  *ngFor="let fake of generateFake(10)" class="card-layout">
+                                        <app-content-loader [numberLines]="1"></app-content-loader>
+                                    </div>
+                            </ng-container>
+                </menu>
+            </aside>
+        </div>
+    </div>
+            <!-- <li class="active">
+                                    <a href="#">Action / Adventure</a>
+                                    <ul>
+                                        <li><a href="#">Latest</a></li>
+                                        <li class="active"><a href="#">Popular</a></li>
+                                        <li><a href="#">Coming soon</a></li>
+                                        <li><a href="#">Staff picks</a></li>
+                                    </ul>
+                                </li> -->

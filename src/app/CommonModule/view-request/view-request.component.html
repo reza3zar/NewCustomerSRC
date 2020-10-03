@@ -1,0 +1,105 @@
+
+
+<div
+class="example-wrapper container-fluid screen-Active"
+style="height: 100%; width: 100%;padding-left: 0px;padding-right: 0px">
+<div class="row"
+    class="screen-Active"
+    style="height: 100%; width: 100%;margin: 0"
+>
+    <div class="col-xs-12 col-sm-12 example-col" class="  holderbig panelbar-wrapper">
+        <app-close-side-nav></app-close-side-nav>
+        <kendo-tabstrip>
+            <kendo-tabstrip-tab
+                [title]="'مشاهده درخواست'"
+                [selected]="true"
+            > 
+
+                <ng-template kendoTabContent>
+    
+                    <div 
+                        class="card text-secondary mb-12"
+                        style="  overflow: auto;height: 100vh;"
+                    > 
+                        <div class="card-header  " >
+
+                     
+                            <div class="row display-tr">
+                                <h3 class="panel-title text-secondary display-tdhead myOrginalFont">
+                                        {{headerTitle}}  
+                                </h3>
+                                <div class="display-td"></div>
+                            </div>
+                        </div>
+
+
+                    <div class="card-body myOrginalFont"   *ngIf=" status=='assignOrRemove'">
+                        
+                    </div>
+ 
+                        <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==1  ">
+                            <app-legal-basic-information  *ngIf="this.customerTypeDescription === 'Public'"  (clickedNext)="onNextPage()"    (clickedPrevious)="onPerviousPage()"    [legalBasicInformation]="this.requestPublic.legalBasicInformation"   [isViewMode]="true" ></app-legal-basic-information>
+                            <app-legal-basic-information *ngIf="this.customerTypeDescription === 'InteriorLegal'"  (clickedNext)="onNextPage()"    (clickedPrevious)="onPerviousPage()"    [legalBasicInformation]="this.requestInteriorLegal.legalBasicInformation"  [isViewMode]="true" ></app-legal-basic-information>
+                            <app-personal-details        *ngIf="this.customerTypeDescription === 'InteriorIndividual'"       (clickedNext)="onNextPage()"    (clickedPrevious)="onPerviousPage()" [personalDetailsInformation]="this.requestInteriorIndividual.personalDetails" [isViewMode]="true">  </app-personal-details>
+                        </div>
+
+                         <div class="panel-body"  style="min-height: 800px;max-height: 800px" *ngIf="pageIndex==2 ">
+                            <app-address-details  *ngIf="this.customerTypeDescription === 'Public'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.addressCollection"  [isViewMode]="true">  </app-address-details>
+                            <app-address-details  *ngIf="this.customerTypeDescription === 'InteriorLegal'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.addressCollection" [isViewMode]="true" >  </app-address-details>
+                            <app-address-details  *ngIf="this.customerTypeDescription === 'InteriorIndividual'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorIndividual.addressCollection"  [isViewMode]="true">  </app-address-details>
+                        </div>
+
+                            <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==3  ">
+                                <app-identity-management         *ngIf="this.customerTypeDescription === 'Public'"      (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.identityCollection"  [isViewMode]="true"></app-identity-management>
+                               <app-identity-management       *ngIf="this.customerTypeDescription === 'InteriorLegal'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.identityCollection" [isViewMode]="true"></app-identity-management>
+                                <app-personal-working-details  *ngIf="this.customerTypeDescription === 'InteriorIndividual'"  (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [workingInfo]="this.requestInteriorIndividual.workingDetails" [isViewMode]="true"> </app-personal-working-details>
+                            </div>
+
+                            <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==4  ">
+                                    <app-bank-account-delegate *ngIf="this.customerTypeDescription === 'Public'"       (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.bankAccountDelegateCollection"  [isViewMode]="true"></app-bank-account-delegate>
+                                    <app-bank-account-delegate *ngIf="this.customerTypeDescription === 'InteriorLegal'"       (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.bankAccountDelegateCollection" [isViewMode]="true"></app-bank-account-delegate>
+                                    <app-identity-management   *ngIf="this.customerTypeDescription === 'InteriorIndividual'"  (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorIndividual.identityCollection" [isViewMode]="true"></app-identity-management>
+                            </div>
+
+                                <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==5  " >
+                                    <app-legal-people-with-voting-right  *ngIf="this.customerTypeDescription === 'Public'"      (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.legalPeopleWithVotingRightCollection"  [isViewMode]="true"></app-legal-people-with-voting-right>
+                                    <app-legal-people-with-voting-right *ngIf="this.customerTypeDescription === 'InteriorLegal'"      (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.legalPeopleWithVotingRightCollection" [isViewMode]="true"></app-legal-people-with-voting-right>
+                                    <app-personal-financial-details     *ngIf="this.customerTypeDescription === 'InteriorIndividual'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [financialDetail]="this.requestInteriorIndividual.financialDetails" [isViewMode]="true"></app-personal-financial-details>
+                               </div>
+
+                               <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==6  ">
+                                <app-stackeholders-informations *ngIf="this.customerTypeDescription === 'Public'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.stockholdersInformationCollection"  [isViewMode]="true"></app-stackeholders-informations>
+                                <app-stackeholders-informations *ngIf="this.customerTypeDescription === 'InteriorLegal'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.stockholdersInformationCollection" [isViewMode]="true"></app-stackeholders-informations>
+                                <app-bank-details *ngIf="this.customerTypeDescription === 'InteriorIndividual'"   (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorIndividual.bankDetails" [isViewMode]="true" ></app-bank-details>
+                                </div>
+
+                                <div class="panel-body"   *ngIf="pageIndex==7  ">
+                                    <app-legal-financial-details  *ngIf="this.customerTypeDescription === 'Public'" [customerType]="this.customerType" (clickedNext)="onNextPage()" [financialDetail]="this.requestPublic.financialDetails"  (clickedPrevious)="onPerviousPage()"  [isViewMode]="true"></app-legal-financial-details>
+
+                                        <app-legal-financial-details  *ngIf="this.customerTypeDescription === 'InteriorLegal'" [customerType]="customerType" (clickedNext)="onNextPage()" [financialDetail]="this.requestInteriorLegal.financialDetails"  (clickedPrevious)="onPerviousPage()" [isViewMode]="true"></app-legal-financial-details>
+                                </div>
+
+                                <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==8  ">
+                                    <app-legal-production-informations *ngIf="this.customerTypeDescription === 'Public'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.productionInformationCollection"  [isViewMode]="true"></app-legal-production-informations>
+                                    <app-legal-production-informations *ngIf="this.customerTypeDescription === 'InteriorLegal'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.productionInformationCollection" [isViewMode]="true"></app-legal-production-informations>
+                                </div>
+
+                                <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==9  ">
+                                    <app-bank-details *ngIf="this.customerTypeDescription === 'Public'"   (clickedSaveRequest)="saveRequest()" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.bankDetails"  [isViewMode]="true"></app-bank-details>
+                                    <app-bank-details *ngIf="this.customerTypeDescription === 'InteriorLegal'"     (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.bankDetails" [isViewMode]="true"></app-bank-details>
+                                </div>
+
+                    </div>
+
+
+                    
+
+                </ng-template>
+            </kendo-tabstrip-tab>
+        </kendo-tabstrip>
+    </div>
+</div>
+</div>
+
+
+

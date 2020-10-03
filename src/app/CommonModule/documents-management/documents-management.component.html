@@ -1,0 +1,215 @@
+ 
+<div *ngIf="!pageIsloaded">
+  <ngx-skeleton-loading-bars [numberOfCard]=15></ngx-skeleton-loading-bars>
+</div>
+
+<div *ngIf="pageIsloaded">
+  <div class="wrapper">
+    <div class="container">
+     
+      <div class="circle"></div>
+      <div class="modal">
+        <div class="modal-container">
+          <div class="title fnt">
+              {{selectedNode?.evidence?.name}} 
+             <a (click)="closeModal()">
+                 <i class="fa fa-times"  ></i>
+             </a>
+          </div>
+          <div class="copy"> 
+            <div style="display: flex;flex-direction: row">
+              <div style="display: flex;flex: 6"> 
+                  <form id="file-upload-form" class="uploader"  >
+                      <input id="file-upload" #myInput type="file" [disabled]="isViewMode"   accept="application/pdf"  (change)="onFileChange($event)"     />
+                   
+         
+
+                      <label for="file-upload" id="file-drag">
+                        <img id="file-image" src="#" alt="Preview" class="hidden">
+                        <div id="start">
+                     
+                          <div class="fnt">یک فایل انتخاب کنید یا فایل را در این محل قرار دهید</div>
+                          <div id="notimage" class="hidden">انتخاب یک Pdf</div>
+                          <span id="file-upload-btn" class="btn btn-primary">
+                              <img    src="../../../assets/images/select.png" width="24">
+                            انتخاب یک فایل</span>
+                        </div>
+                        <div id="response" class="hidden">
+                          <div id="messages"></div>
+                          <progress class="progress" id="file-progress" value="0">
+                            <span>0</span>%
+                          </progress>
+                        </div>
+                      </label>
+                    </form>
+              </div>
+              <pdf-viewer [src]="pdfSrcs" *ngIf="pdfSrcs!==undefined && pdfSrcs!==null" style="display: flex;flex: 6"
+              [render-text]="true"
+              [fit-to-page]="true"
+              (after-load-complete)="callBackFn($event)"
+              style="display: block; width: 250px;height: 230px;"
+               ></pdf-viewer>
+               
+                <div id="loader"  *ngIf="!pdfPreviewIsLoaded">
+                  <div id="box"></div>
+                  <div id="hill"></div>
+                </div>
+                  <img style="display: block; width: 220px;height: 230px;" *ngIf="pdfSrcs==undefined || pdfSrcs==null" src="../../../assets/images/pdfViewer.png">
+             
+            </div>
+
+            <div style="display: flex;flex-direction: row"> 
+            <div style="display: flex;flex: 6;align-content: center;align-items: center">
+                <button class="face-button" [disabled]="pdfFile==undefined || isViewMode"  [ngClass]="{'m-progress':sendDataToServer}"  (click)="uploadFile()">
+
+                    <div class="face-primary">
+                        <img    src="../../../assets/images/uploadPdf.png" width="24">
+                        بارگذاری
+                    </div>
+                    
+                    <div class="face-secondary">
+                        <img    src="../../../assets/images/pdfUpload.png" width="24">
+                        بارگذاری فایل PDF
+                    </div>
+                  
+                  </button>
+            </div>
+            <div style="display: flex;flex: 6;align-content: center;align-items: center">
+                <button class="face-button"  [disabled]="!hasUploadFile" [ngClass]="{'m-progress':downloadFileStatus}" (click)="downloadDocumentOfSelectedNode()">
+
+                    <div class="face-primary">
+                      <!-- <span class="icon fa fa-cloud"></span> -->
+                      <img    src="../../../assets/images/downloadPdf.png" width="24">
+                      دانلود
+                    </div>
+                    
+                    <div class="face-secondary">
+                        <img    src="../../../assets/images/downloadSize.png" width="24">
+                      حجم:  {{selectedNodeSize}}    
+                    </div> 
+                  
+                  </button>
+            </div> 
+          </div>
+           
+          </div>
+          <!-- <div class="close2" >
+            <button (click)="closeModal()">
+              Continue
+              <i class="fa fa-times"  ></i>
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+      
+      <div id="app" class="app" class="fnt">
+          <div data-reactroot="" class="auth" style="height: 100vh;">
+              <div class="auth-login" [ngClass]="{'blur': IsBlur}" >
+
+                  <div class="MyLayout">
+                      <!-- <div class="col col-complementary" role="complementary">
+                        <ul class="features">
+                          <li class="fnt" >
+                             <ngx-document></ngx-document>
+                              
+                          </li>
+             
+                        </ul>
+                      </div> -->
+
+                      <!-- <button (click)="openModal()">reza</button> -->
+
+
+                      <div class="col col-main" role="main">
+                        <div class="auth-signup__container">
+                            <div class="auth-signup__container__work-flow">
+                                <p class="auth-signup__container__work-flow__text">&nbsp;</p>
+                                <div class="work-flow">
+                                    <div class="work-flow__data"><img  (click)="openModal()" src="../../../assets/images/pdf.png" width="48"><span class="work-flow__data__heading">فرمت اسناد</span>
+                                        <p class="work-flow__data__text fnt" > لازم است هر مدارک به صورت یک فایل PDF بارگذاری شود.</p>
+                                    </div>
+                                    <div class="work-flow__data"><img src="../../../assets/images/max.png" width="48"><span class="work-flow__data__heading">محدودیت حجم هر سند</span>
+                                        <p class="work-flow__data__text fnt">حداکثر اندازه فایل جهت بارگذاری 30MB می باشد</p>
+                                    </div>
+                                    <div class="work-flow__data"><img  src="../../../assets/images/checklist.png" width="48"><span class="work-flow__data__heading">اسناد اجباری</span>
+                                        <p class="work-flow__data__text fnt"> برای بررسی درخواست‌ها لازم است تمامی مدارک الزامی پیوست شوند</p>
+                                    </div>
+
+                                    <div class="work-flow__data"><img  src="../../../assets/images/exchange.png" width="48"><span class="work-flow__data__heading">بازنویسی اسناد</span>
+                                      <p class="work-flow__data__text fnt">در صورت بارگذاری مجدد، مدرک جدید جایگزین مدرک قبلی می شود</p>
+                                  </div>
+
+                                  <div class="work-flow__data"><img (click)="backToRequests()"   src="../../../assets/images/return.png" style="cursor: pointer!important;" width="48"><span style="cursor: pointer!important;"  (click)="backToRequests()" class="work-flow__data__heading">بازگشت</span>
+                                    <a class=" " (click)="backToRequests()" style="color: #6a6a6a !important;cursor: pointer;" ><span>به مدیریت درخواست‌ها</span></a>
+                                </div>
+
+
+                                </div>
+                              
+                               
+
+                            </div>
+                     
+
+                            <div class="typewriter">
+                              <div class="typewriter-text myOrginalFont">مدیریت مدارک  {{requestName}}</div>
+                          </div>
+                            
+                            <div class="auth-signup__container__form">
+
+                                <div id="wrapper"> 
+
+                                  <span class="label fnt" >
+                                    {{root}}
+                                  </span>
+
+                                  <div class="branch lv1"  >
+                                    <div class="entry" *ngFor="let evidence of evidenceCategories"><span class="label fnt ">{{evidence.name}}</span>
+                                      <div class="branch lv2" >
+                                          <ngx-branch [allNodes]="allNodes"  [allNodesINDatabase]="allNodesINDatabase" (nodeClickOccurred)="openModal($event)" [type]="type" [catId]="evidence.id"></ngx-branch>
+                                      </div>
+                                    </div>
+                              
+                                  </div>
+                                </div>
+
+                                <!-- <form data-bitwarden-watching="1" style="padding-bottom: 20px">
+                                    <div class="tree">
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="fnt">{{root.name}}</a>
+                                                <ul>
+                                                    <li *ngFor="let evidence of evidenceCategories">
+                                                      <div>
+                                                          <a href="#"   class="fnt">{{evidence.name}}</a>
+                                                          <ngx-branch [allNodes]="allNodes" [catId]="evidence.id"></ngx-branch>
+                                                      </div>
+
+                                                    </li>
+                                            
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+  
+                                </form> -->
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+ 
+</div>
+
+    
+ 
+ 
+
+ 

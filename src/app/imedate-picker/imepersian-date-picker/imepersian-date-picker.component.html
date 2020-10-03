@@ -1,0 +1,12 @@
+<!-- 
+<input  id="rnd" class="form-control inputGrp IMEDate responsiveSetting"    #dte type="text" [(ngModel)]="inputModel"
+onchange="inputValueChanged($(this).val())" (ngModelChange)="inputModelChange.emit(inputModel)"/>
+    -->
+
+    
+<input  id="rnd" class="IMEDate form-control inputGrp responsiveSetting" [disabled]="disabled"  autocomplete="off" #dte type="text"  value="{{inputModel}}"
+onchange="inputValueChanged($(this).val())" (ngModelChange)="modelHasChanged()"/>
+
+ 
+   
+   

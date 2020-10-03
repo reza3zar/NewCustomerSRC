@@ -1,0 +1,345 @@
+<form  [formGroup]="requestForm" class="simple-form container"   *ngIf="showNewRequest" >
+        
+         <div class="panel panel-info">
+             <div class="panel-heading clearfix">
+                 <i class="icon-calendar"></i>
+                 <h3 class="panel-title"></h3>
+             </div>
+ 
+             <div class="card-bodys">
+   
+                 <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            
+
+
+                                    <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                     <span class="input-group-text spanGrp spanSmall">بــــــانــــک</span>
+                                                </div>
+                                                <app-bank-combo-box  class="width60" formControlName="bank" [(ngModel)]="detailsInformation.bank"
+                                                required  ></app-bank-combo-box >
+                                    </div>
+                                    
+                                    <div *ngIf="submitted && ctrl.bank.errors" class="invalid-feedback">
+                                            <div *ngIf="submitted && ctrl.bank.errors.required" class="fontColorError">فیلد بانک الزامی است</div>
+                                     </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+                          
+
+
+                                    <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                     <span class="input-group-text spanGrp spanSmall">شــــهـــرســتــــان</span>
+                                                </div>
+                                                <app-city-combo-box  class="width60" formControlName="city" [(ngModel)]="detailsInformation.city"
+                                                required  ></app-city-combo-box  >
+                                    </div>
+
+                                    <div *ngIf="submitted && ctrl.city.errors" class="invalid-feedback">
+                                            <div *ngIf="submitted && ctrl.city.errors.required" class="fontColorError">فیلد شهرستان الزامی است</div>
+                                     </div>
+                        </div>
+
+                     </div>
+
+                 <br />
+
+
+                 <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+ 
+
+                            <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <span class="input-group-text spanGrp spanSmall"> نـام شــعـبــه</span>
+                                        </div>
+                                <input type="text" formControlName="branchName" ngxOnlyPersianChars  [(ngModel)]="detailsInformation.branchName"   required  class="form-control inputGrp" />
+                             </div>
+
+
+                            <div *ngIf="submitted && ctrl.branchName.errors" class="invalid-feedback">
+                                     <div *ngIf="submitted && ctrl.branchName.errors.required" class="fontColorError">فیلد نام شعبه الزامی است</div>
+                             </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+
+                      
+
+                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <span class="input-group-text spanGrp spanSmall">  کـــــد شــــعــبـــه</span>
+                                        </div>
+                                        <input type='text'  [imask]="{mask: '0000000000000'}" class="form-control numberDirection" formControlName="branchCode"  [(ngModel)]="detailsInformation.branchCode"
+                                        required  class="form-control inputGrp" />
+                               
+                        </div>
+
+                        <div *ngIf=" ctrl.branchCode.errors?.minlength" class="fontColorError">
+                              کـد شعبـه حداقل 3 رقم می‌باشد
+                       </div> 
+
+
+                       <div *ngIf=" ctrl.branchCode.errors?.maxlength" class="fontColorError">
+                              کـد شعبـه حداکثر 10 رقم می‌باشد
+                        </div> 
+
+                            <div *ngIf="submitted && ctrl.branchCode.errors" class="invalid-feedback">
+                                     <div *ngIf="submitted && ctrl.branchCode.errors.required" class="fontColorError">فیلد کد شعبه الزامی است</div>
+                             </div>
+                    </div>
+                 </div>
+                 <br />
+
+                 <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+
+                                            
+
+
+                                                    <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                     <span class="input-group-text spanGrp spanSmall">شماره حســاب</span>
+                                                                </div>
+                                                                <input type='text'  [imask]="{mask: '0000000000000'}" class="form-control numberDirection" formControlName="accountNumber"
+                                                                [(ngModel)]="detailsInformation.accountNumber"   required  class="form-control inputGrp" />
+                                                       
+                                                     </div>
+                                                     <div *ngIf=" ctrl.accountNumber.errors?.minlength" class="fontColorError">
+                                                            شماره حساب حداقل 3 رقم می‌باشد
+                                                     </div> 
+                            
+                            
+                                                     <div *ngIf=" ctrl.accountNumber.errors?.maxlength" class="fontColorError">
+                                                            شماره حساب حداکثر 20 رقم می‌باشد
+                                                      </div> 
+
+                                                    <div *ngIf="submitted && ctrl.accountNumber.errors" class="invalid-feedback">
+                                                             <div *ngIf="submitted && ctrl.accountNumber.errors.required" class="fontColorError">فیلد شماره حساب الزامی است</div>
+                                                     </div>
+                                            </div>
+
+
+                                            
+                        <div class="col-lg-6 col-sm-12">
+                           
+
+                                    <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                     <span class="input-group-text spanGrp spanSmall">نــــــوع حســـــاب</span>
+                                                </div>
+                                                <app-bank-accout-type type="text" class="width60" formControlName="accountTypes" [(ngModel)]="detailsInformation.accountType"
+                                                required  ></app-bank-accout-type >
+                                    </div>
+
+
+                                    <div *ngIf="submitted && ctrl.accountTypes.errors" class="invalid-feedback">
+                                            <div *ngIf="submitted && ctrl.accountTypes.errors.required" class="fontColorError">فیلد نوع حساب الزامی است</div>
+                                     </div>
+                        </div>
+
+               
+
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+
+                           <div class="col-lg-12 col-sm-12">
+                    
+
+
+                                       <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                     <span class="input-group-text spanGrp spanSmall">کــــد شــبـــا</span>
+                                                </div>
+                                                <input type='text'  [imask]="{mask: 'IR000000000000000000000000'}" class="form-control"  formControlName="IBANCode"  [(ngModel)]="detailsInformation.ibanCode"
+                                                required  class="form-control inputGrp numberDirection" />
+                                       
+                                     </div>
+
+                                     <div *ngIf=" ctrl.IBANCode.errors?.minlength" class="fontColorError">
+                                             فرمت کد شبا رعایت نشده است
+                                      </div> 
+               
+               
+                                      <div *ngIf=" ctrl.IBANCode.errors?.maxlength" class="fontColorError">
+                                             فرمت کد شبا رعایت نشده است
+                                             
+                                       </div> 
+
+                                       <div *ngIf="submitted && ctrl.IBANCode.errors" class="invalid-feedback">
+                                               <div *ngIf="submitted && ctrl.IBANCode.errors.required" class="fontColorError">فیلد کد شبا الزامی است</div>
+                                        </div>
+                           </div>
+
+
+                       </div>
+
+
+                    <br />
+
+             </div>
+             <br />
+
+             <div class="row">
+
+                    <div class="col-xs-6 col-md-6">
+                            <button (click)="cancel()" class="btn btn-danger btn-block btn-lg text-dark">
+                               انصراف</button>
+                        </div>
+
+
+                     <div class="col-xs-6 col-md-6">
+                         <button
+                             (click)="onSubmit()"
+                             [disabled]="isViewMode"
+
+                             [ngClass]="{ 'not-active': !requestForm.valid }"
+                             class="btn btn-success btn-block btn-lg text-dark"> 
+                             ذخیره
+                         </button>
+                     </div>
+               
+              </div>
+ 
+            <br />
+
+             </div>
+             </form>
+
+
+
+             
+<div *ngIf="!showNewRequest">
+              <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <kendo-grid
+                          [data]="gridDataCollection"
+                          (selectionChange)="selected($event)"
+                          [resizable]="true"
+                          [sortable]="{ mode: 'multiple' }"
+                          [selectable]="{ mode: 'single' }"
+                          [sortable]="{
+                              allowUnsort: true,
+                              mode: 'multiple'
+                          }"
+                          [height]="300"
+                      >
+                          <kendo-grid-messages
+                              noRecords="رکوردی برای نمایش یافت نشد!"
+                              pagerItems="کل رکورد"
+                              pagerOf="از"
+                              sortAscending="صعودی"
+                              sortDescending="نزولی"
+                              filter="جستجو"
+                              columns="انتخاب سر ستون"
+                              columnsApply="اعمال"
+                              columnsReset="باز نشانی"
+                          >
+                          </kendo-grid-messages>
+                          <ng-template kendoGridToolbarTemplate>
+                              <button
+                                  (click)="createNewRequest()"
+                                  class="btn btn-default btn-block"
+                                  type="button"
+                                  [disabled]="isViewMode"
+
+                              ><i class="fa fa-plus" aria-hidden="true"></i>
+          
+                                  ایجاد
+                              </button>
+                          </ng-template>
+          
+                          <kendo-grid-column
+                              field="bank.name"
+                              title="بانک"
+                              width="90"
+                              [filterable]="true">
+                          </kendo-grid-column>
+          
+                          <kendo-grid-column
+                          field="city.name"
+                          title="شهرستان"
+                          width="90"
+                          [filterable]="true">
+                      </kendo-grid-column>
+
+                                 <kendo-grid-column
+                                 field="branchName"
+                                 title="نام شعبه"
+                                 width="90"
+                                 [filterable]="true">
+                             </kendo-grid-column>
+                      
+                             <kendo-grid-column
+                             field="branchCode"
+                             title="کد شعبه"
+                             width="90"
+                             [filterable]="true">
+                         </kendo-grid-column>
+                  
+                         <kendo-grid-column
+                         field="accountNumber"
+                         title="شماره حساب"
+                         width="90"
+                         [filterable]="true">
+                     </kendo-grid-column>
+          
+                          <kendo-grid-column
+                              field="عملیات"
+                              [filterable]="false"
+                              width="100">
+                              <ng-template kendoGridCellTemplate let-dataItem>
+                                  <div class="row" style="margin-right: 1px">
+                                      <button
+                                          type="button"
+                                          class="btn btn-primary  btn-circle"
+                                          [disabled]="checkIsSelectedRow(dataItem.id)"
+                                          matTooltip="ویرایش"
+                                          (click)="editSelectedBankItem()"
+                                      >
+                                          <i class="fa fa-save"></i>
+                                      </button>
+                                      <button
+                                          type="button"
+                                          (click)="deleteSelectedBankItem()"
+                                          class="btn btn-danger  btn-circle"
+                                          [disabled]="checkIsSelectedRow(dataItem.id) || isViewMode"
+                                          matTooltip="حذف"
+          
+                                      >
+                                          <i class="fa   fa-times"></i>
+                                      </button>
+                                  </div>
+                              </ng-template>
+                          </kendo-grid-column>
+                      </kendo-grid>
+                      <p class="fontColorError myOrginalFont">{{errorMinRecord}}</p>
+                  </div>
+              </div>
+              <br />
+          
+              <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                            <button (click)="onPrevious()" class="btn btn-danger btn-block btn-lg text-dark">
+                               بازگشت به مرحله قبل</button>
+                        </div>
+                        
+                            <div class="col-xs-6 col-md-6">
+                                <button
+                                    (click)="saveRequest()"
+                                    [disabled]="isViewMode"
+
+                                    [ngClass]="{'m-progress':sendDataToServer}"
+                                    class="btn btn-success btn-block btn-lg text-dark"> 
+                                    درخواست ذخیره
+                                </button>
+                            </div>
+                       
+                     </div>
+              <br />
+          </div>

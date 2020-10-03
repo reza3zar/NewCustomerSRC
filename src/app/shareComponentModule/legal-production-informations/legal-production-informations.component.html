@@ -1,0 +1,239 @@
+ 
+
+<form  [formGroup]="requestForm" class="simple-form "  *ngIf="showNewRequest"  (ngSubmit)="onSubmit()">
+         <div class="panel panel-info">
+             <div class="panel-heading clearfix">
+                 <i class="icon-calendar"></i>
+                 <h3 class="panel-title"></h3>
+             </div>
+
+   
+<div class="card-bodys">
+                 <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+ 
+
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text spanGrp fntSmall spanSmall"> نام کالا / خدمات</span>
+                                </div>
+                                <input type="text" formControlName="productName" ngxOnlyPersianChars [(ngModel)]="productionInformation.productName"   required  class="form-control inputGrp" />
+                        </div>
+
+                            <div *ngIf="submitted && ctrl.productName.errors" class="invalid-feedback">
+                                     <div *ngIf="submitted && ctrl.productName.errors.required" class="fontColorError">فیلد نام کالا / خدمات الزامی است</div>
+                             </div>
+                    </div>
+
+                 </div>
+                 <br />
+
+                 <div class="row">
+
+                        <div class="col-lg-6 col-sm-12">
+
+                           
+
+
+                                    <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                    <span class="input-group-text spanGrp fntSmall spanSmall">  مــــــقـــــدار</span>
+                                            </div>
+                                        <input type="text" formControlName="amount" [imask]="{mask: '000000000000'}"  [(ngModel)]="productionInformation.amount"   required  class="form-control numberDirection inputGrp" />
+
+                                    </div>
+
+
+                                    <div *ngIf="submitted && ctrl.amount.errors" class="invalid-feedback">
+                                             <div *ngIf="submitted && ctrl.amount.errors.required" class="fontColorError">فیلد مقدار الزامی است</div>
+                                     </div>
+                            </div>
+
+
+                    <div class="col-lg-6 col-sm-12">
+ 
+
+                            <div class="input-group">
+                                    <div class="input-group-prepend">
+                                         <span class="input-group-text spanGrp spanSmall">واحد اندازه گیری</span>
+                                    </div>
+                                <app-measurement-units-combo-box class="width60" formControlName="measurementUnit"  [(ngModel)]="productionInformation.measurementUnit"   required ></app-measurement-units-combo-box>
+                                    
+                              </div>
+
+
+                            <div *ngIf="submitted && ctrl.measurementUnit.errors" class="invalid-feedback">
+                                     <div *ngIf="submitted && ctrl.measurementUnit.errors.required" class="fontColorError">فیلد مقدار الزامی است</div>
+                             </div>
+                    </div>
+
+                 </div>
+                 <br />
+                 <br />
+
+          
+
+
+                <div class="row">
+
+                        <div class="col-xs-6 col-md-6">
+                                <button  (click)="cancel()"  class="btn btn-danger btn-block btn-lg text-dark">انصراف</button>
+                            </div>
+
+
+                    
+                        <div class="col-xs-6 col-md-6">
+                              
+                             <button
+                             (click)="onSubmit()"
+                             [disabled]="isViewMode"
+
+                             [ngClass]="{ 'not-active': !requestForm.valid }"
+                             class="btn btn-success btn-block btn-lg text-dark"> 
+                             ذخیره
+                             </button>
+
+
+                        </div>
+                   
+                   
+                </div>
+
+                <br />
+
+             </div>
+             <br />
+
+
+
+
+             </div>
+             </form>
+
+
+             <div class="row  " *ngIf="!showNewRequest">
+                    <p class="serghat-main  myOrginalFont text-secondary container">
+                        
+                   </p>
+                   
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                <kendo-grid
+                [data]="gridDataCollection"
+                (selectionChange)="selected($event)"
+                [resizable]="true"
+                [sortable]="{ mode: 'multiple' }"
+                [selectable]="{ mode: 'single' }"
+                [sortable]="{
+                    allowUnsort: true,
+                    mode: 'multiple'
+                }"
+                [height]="300"
+            >
+            <kendo-grid-messages
+            noRecords="رکوردی برای نمایش یافت نشد!"
+            pagerItems="کل رکورد"
+            pagerOf="از"
+            sortAscending="صعودی"
+            sortDescending="نزولی"
+            filter="جستجو"
+            columns="انتخاب سر ستون"
+            columnsApply="اعمال"
+            columnsReset="باز نشانی"
+        >
+        </kendo-grid-messages>
+                <ng-template kendoGridToolbarTemplate>
+                        <button
+                        (click)="createNewRequest()"
+                        class="btn btn-default btn-block"
+                        [disabled]="isViewMode"
+
+                        type="button"
+                    ><i class="fa fa-plus" aria-hidden="true"></i>
+
+                        ایجاد
+                    </button>
+                </ng-template>
+
+                <kendo-grid-column
+                    field="productName"
+                    title="نام کالا / خدمات"
+                    width="210"
+                >
+                </kendo-grid-column>
+
+                <kendo-grid-column
+                field="amount"
+                title="مقدار"
+                width="210">
+            </kendo-grid-column>
+
+            <kendo-grid-column
+            field="measurementUnit.name"
+            title="واحد اندازه گیری">
+        </kendo-grid-column>
+
+
+                <kendo-grid-column field="عملیات" [filterable]="false" width="100">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                 
+
+
+
+                        <div class="row" style="margin-right: 1px">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary  btn-circle"
+                                    [disabled]="checkIsSelectedRow(dataItem.id)"
+                                    matTooltip="ویرایش"
+                                    (click)="editSelectedIdentify()">
+                                    <i class="fa fa-save"></i>
+                                </button>
+                                <button
+                                    type="button"
+                                    (click)="deleteSelectedIdentify()"
+                                    class="btn btn-danger  btn-circle"
+                                    [disabled]="checkIsSelectedRow(dataItem.id) || isViewMode"
+
+                                    matTooltip="حذف">
+                                    <i class="fa   fa-times"></i>
+                                </button>
+                        </div>
+                    </ng-template>
+                </kendo-grid-column>
+
+
+            </kendo-grid>
+            </div>
+
+      
+
+
+  
+
+
+         </div>
+         <br/>
+
+                   
+         <div class="row  " *ngIf="!showNewRequest">
+
+                <div class="col-xs-6 col-md-6">
+                        <a (click)="onPrevious()" class="btn btn-danger btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                           مرحله قبل</a>
+                    </div>
+
+
+                <div class="col-xs-6 col-md-6">
+                    <a
+                        (click)="onNext()"
+                         
+
+                        class="btn btn-success btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                        مرحله بعد
+                </a>
+                </div>
+         
+        </div>
+
+
+

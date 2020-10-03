@@ -1,0 +1,133 @@
+ 
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+  }
+  
+  // RESETS
+  
+  .button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+  }
+  
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .link {
+    text-decoration: none;
+  }
+  
+  // CSS
+  
+  .combo-select {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .combo-select__button {
+    background: #ffffff;
+    padding: 0px;
+    width: auto;
+    color: #727388;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid #9595a3;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all .3s ease;
+    
+    &:hover {
+      background: #F1F1F3;
+    }
+  }
+  
+  .combo-select--active
+  .combo-select__button,
+  .combo-select--active
+  .combo-select__icon,
+  .combo-select__button:focus {
+    border-color: #009EEF;
+  }
+  
+  .combo-select__text {
+    padding: 16px;
+    display: inline-block;
+  }
+  
+  .combo-select__icon {
+    border-left: 2px solid #9595a3;
+    padding: 12px;
+    display: inline-block;
+    transition: all .3s ease;
+  }
+  
+  .combo-select__menu-wrapper {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background-color: #ffffff;
+    color: #727388;
+    transition: all .3s ease;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 4px;
+    box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.2);
+    z-index: 22222222 !important;
+  }
+  
+  .combo-select__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .combo-select__item {
+    color: #727388;
+    padding: 12px 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    transition: all .3s ease;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+  
+    
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: #F1F1F3;
+      color: #007AE6;
+    }
+    
+    &:hover {
+      .combo-select__download-icon {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .combo-select__download-icon {
+    // consider opacity 1 if on mobile
+    opacity: 0;
+    transition: all .3s ease;
+  
+  }
+  .combo-select--active
+  .combo-select__menu-wrapper {
+    opacity: 1;
+    visibility: visible;
+  }
+
+   li{
+     font-size: small;
+   }

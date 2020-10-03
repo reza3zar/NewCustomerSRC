@@ -1,0 +1,262 @@
+
+
+<app-slid-in-out
+*ngIf="typeOpereation === 'addNewRequest' || typeOpereation === 'editRequest'  || typeOpereation === 'viewRequest' "
+class="popup"
+[bgColour]="mybg">
+                   <ngx-create-attorney-request (needToUpdate)="updateRequestInDataCollectionOfGrid($event)"  [isViewMode]="isViewMode" [attorneyRequest]="attorneyRequest" [operationType]="operationType"></ngx-create-attorney-request> 
+</app-slid-in-out>
+
+
+<div [ngClass]="{ 'fullscreen-inActive': state }">
+    <kendo-grid
+    [data]="gridData"
+    (cellClick)="onCellClick($event)"
+    [resizable]="true"
+    [sortable]="{ mode: 'multiple' }"
+    [selectable]="{ mode: 'single' }"
+    (selectionChange)="selected($event)"
+    (sortChange)="sortChange($event)"
+    [sortable]="{
+        allowUnsort: true,
+        mode: 'multiple'
+    }"
+    [sort]="sort"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [pageable]="true"
+    [filter]="filter"
+    (filterChange)="filterChange($event)"
+    [filterable]="true"
+    (pageChange)="pageChange($event)"
+    [height]="815"
+     >
+    <kendo-grid-messages
+        noRecords="رکوردی برای نمایش یافت نشد!"
+        pagerItems="کل رکورد"
+        pagerOf="از"
+        sortAscending="صعودی"
+        sortDescending="نزولی"
+        filter="جستجو"
+        columns="انتخاب سر ستون"
+        columnsApply="اعمال"
+        columnsReset="باز نشانی"
+        (selectionChange)="selected($event)"
+    >
+    </kendo-grid-messages>
+    <ng-template kendoGridToolbarTemplate>
+ 
+       
+
+
+        <a
+        (click)="refreshAllRequest()"
+        class="buttoFlat"
+
+        type="button"
+    >
+    <img    src="../../../../assets/images/loop.png" width="24">
+
+        به روز رسانی
+    </a>
+    </ng-template>
+    <kendo-grid-column
+    field="id"
+    width="70"
+    title="شناسه"
+    [filterable]="true"
+>
+</kendo-grid-column>
+
+    <kendo-grid-column
+        field="attorneyName"
+        title="مشخصات وکیل"
+        width="150"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+        field="attorneyExternalId"
+        title="شناسه‌ملی وکیل"
+        width="100"
+        [filterable]="true">
+    </kendo-grid-column>
+
+      <kendo-grid-column
+      field="customerName"
+      title="مشخصات موکل"
+      width="150"
+      [filterable]="true"
+  >
+  </kendo-grid-column>
+
+    <kendo-grid-column
+    field="customerExternalId"
+    title="شناسه‌ملی موکل"
+    width="150"
+    [filterable]="true"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="spotCode"
+    title="کد نقدی"
+    width="150"
+    [filterable]="true" 
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+    field="derivativeCode"
+    title="کد مشتقه"
+    width="150"
+    [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+    field="auctionCode"
+    title="کد قدیمی"
+    width="150"
+    [filterable]="true"
+    >
+    </kendo-grid-column>
+    
+ 
+ 
+    <kendo-grid-column
+    field="createDate"
+    title="زمان ایجاد"
+    width="150"
+    [filterable]="true"
+    >
+    </kendo-grid-column>
+    
+ 
+
+    <kendo-grid-column field="عملیات" width="235" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <div class="row" style="margin-right: 1px " kendoTooltip>
+   
+
+
+              
+
+                    <button
+                       nbTooltip="ویرایش" nbTooltipStatus="warning"
+                        type="button"
+                        nbButton  outline
+                        (click)="openConfirmDeleteModal()"
+                        status="warning"
+                        class="btn  btn-warning btn-circle btnBlack"
+                        [disabled]="checkIsSelectedRowForOperation(dataItem.id) || editInProgress">
+                        <i class="fa fa-wrench"></i>
+                        <span [ngClass]="{'spinner-grow spinner-grow-sm':editInProgress  &&  !checkIsSelectedRowForOperation(dataItem.id)}"   ></span>
+                    </button>
+
+            
+
+                    <button nbTooltip="حذف" nbTooltipStatus="danger"
+                    type="button"
+                    nbButton  outline
+                    status="danger"
+                    class="myOrginalFont btn btn-danger  btn-circle btnBlack"
+                    (click)="openConfirmDeleteModal()"
+                    [disabled]="checkIsSelectedRowForOperation(dataItem.id)">
+                    <i class="fa fa-trash"></i>
+                </button>
+
+        
+                    <button
+                    nbTooltip="مشاهده درخواست" nbTooltipStatus="success"
+                    type="button"
+                    nbButton  outline
+                    (click)="showRequestDetails(dataItem.id)"
+                    status="success"
+                    class="btn  btn-success btn-circle btnBlack"
+                    
+                    [disabled]="checkIsSelectedRowForOperation(dataItem.id) || viewInProgress"
+                >
+                    <i class="fa fa-eye"></i>
+                    <span [ngClass]="{'spinner-grow spinner-grow-sm':viewInProgress   }"   ></span>
+                </button>
+           
+        
+                <button
+                nbTooltip="دریافت مدارک" nbTooltipStatus="primary"
+                type="button"
+                nbButton outline
+                status="primary"
+                (click)="downloadDocuments()"
+                [disabled]="checkIsSelectedRowForOperation(dataItem.id) || isDownloading"
+                class="btn  btn-primary btn-circle btnBlack" >
+                <span [ngClass]="{'spinner-grow spinner-grow-sm': isDownloading && !checkIsSelectedRow(dataItem.id) }"   ></span>
+                <!-- <img    src="../../../../assets/images/dc.png" width="24"> -->
+                <i class="fa fa-download"></i>
+            </button>
+                </div>
+
+      
+                <ng-template
+                    kendoPagerTemplate
+                    let-totalPages="totalPages"
+                    let-currentPage="currentPage">
+                    <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+                    <kendo-pager-numeric-buttons
+                        [buttonCount]="12"
+                    ></kendo-pager-numeric-buttons>
+                    <kendo-pager-info></kendo-pager-info>
+                    <kendo-pager-next-buttons></kendo-pager-next-buttons>
+                    <kendo-pager-page-sizes
+                        [pageSizes]="[12, 120, 240]"
+                    ></kendo-pager-page-sizes>
+                </ng-template>
+            </ng-template>
+        </kendo-grid-column>
+
+    
+ 
+</kendo-grid>
+
+<div *ngIf="loadingGrid " class="k-i-loading"></div>
+
+
+</div>
+<div class="row">
+    <modal #deleteModal  >
+        <modal-header >
+            <h3  class="myOrginalFont"><nb-icon status="basic" icon="alert-triangle-outline"></nb-icon>  تــــــوجه</h3>
+        </modal-header>
+        <modal-content>
+            این امکان هم‌اکنون در دسترس نمی باشد
+        </modal-content>
+        <modal-footer> 
+            <button nbButton status="success" class="myOrginalFont dialog-Btn"  disabled   >تایید<nb-icon icon="done-all-outline"></nb-icon></button>
+             <button nbButton  status="danger" (click)="closeModal()" class="myOrginalFont dialog-Btn">انصراف<nb-icon icon="close-outline"></nb-icon></button>
+        </modal-footer>
+    </modal>
+    </div>
+
+    <div class="row">
+        <modal #contentTemplate  >
+            <modal-header >
+                <h4 class="myOrginalFont"><nb-icon status="info" icon="bulb-outline"></nb-icon> پاسخ درخواست</h4>
+            </modal-header>
+            <modal-content>
+                    <p class="myOrginalFont">  {{ selectedRequestItemResult==null?'': selectedRequestItemResult.responseDescription }}</p>
+            </modal-content>
+            <modal-footer> 
+                
+            </modal-footer>
+        </modal>
+    </div>
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 

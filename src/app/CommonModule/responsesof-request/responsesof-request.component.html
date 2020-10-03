@@ -1,0 +1,22 @@
+<kendo-combobox  
+    [data]="responsesCollection"
+    [textField]="'name'"
+    [valueField]="'id'"
+    [filterable]="true"
+    [(ngModel)]="value"
+    (valueChange)="valueChange($event)"
+    name="name"
+    [disabled]=disabled
+    [placeholder]="''"
+    [popupSettings]="{
+        width: 350,
+        height: 150
+      }"
+      style="width: 300px;"
+>
+
+<ng-template kendoComboBoxItemTemplate let-dataItem class="myOrginalFont">
+    <span class="myOrginalFont" >{{ dataItem.name }}</span> 
+</ng-template>
+
+</kendo-combobox>

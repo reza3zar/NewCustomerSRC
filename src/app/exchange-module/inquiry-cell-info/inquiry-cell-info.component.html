@@ -1,0 +1,20 @@
+<section class="sectionTransparent" style="direction: rtl;" [ngClass]="{ 'fullscreen-inActive': state }"  (ngSubmit)="inquiry()" [formGroup]="requestForm" *ngIf="!(_collectionControls?.length>0)">
+
+    <div class="box">
+      <input type="text" name="nCode" value="" placeholder="کــــد ملی" [imask]="{mask: '00000000000000'}" [(ngModel)]="verifyInfo.nationalCode" class="form-control" formControlName="ncode">
+     <input type="text" name="cell" value="" placeholder="شماره همراه"  [imask]="{mask: '00000000000000'}" [(ngModel)]="verifyInfo.cellPhone" class="form-control" formControlName="cellNumber">
+      <!-- <input type="submit"  (click)="inquiry()" [ngClass]="{'m-progress':sendDataToServer}" value="استعــلام"> -->
+      <a type="submit"  (click)="inquiry()" class="btn btn-success btn-block btn-lg" [ngClass]="{'m-progress':sendDataToServer}"  >استعــلام</a>
+    </div>
+</section>
+
+
+<app-slid-in-out
+    *ngIf="_collectionControls?.length>0"
+    class="popup"
+
+>
+<app-show-result-info  [collection]="_collectionControls" ></app-show-result-info >
+
+
+</app-slid-in-out>

@@ -1,0 +1,11 @@
+<kendo-combobox
+    [data]="dataBanks"
+    [textField]="'name'"
+    [valueField]="'bank'"
+    [filterable]="true"
+    (filterChange)="handleFilterBanks($event)"
+    name="bankName"
+    [(ngModel)]="value"
+    [placeholder]="'نام بانک'"
+>
+</kendo-combobox>

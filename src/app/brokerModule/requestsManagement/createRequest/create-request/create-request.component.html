@@ -1,0 +1,192 @@
+
+
+<div
+    class="example-wrapper container-fluid screen-Active"
+    style="height: 100%; width: 100%;padding-left: 0px;padding-right: 0px">
+    <div
+        class="row"
+        class="screen-Active"
+        style="height: 100%; width: 100%;margin: 0"
+    >
+        <div class="col-xs-12 col-sm-12 example-col" class=" holderbig panelbar-wrapper">
+            <app-close-side-nav></app-close-side-nav>
+            <kendo-tabstrip
+                 >
+
+                <kendo-tabstrip-tab
+                    [title]="'مدیریت درخواست'"
+                    [selected]="true"
+                >
+                    <ng-template kendoTabContent>
+                        <!-- <ngx-gather-customer-data-loading >
+
+                        </ngx-gather-customer-data-loading> -->
+                        <div 
+                            class="card text-secondary mb-12"
+                            style="  overflow: auto;height: 100vh;"
+                        > 
+
+                            <div class="card-header  " >
+
+                                <div class="typewriter" *ngIf="(sendDataToServer || isInquiryOfRequest) && pageIndex==0 && mode!=='edit' " style="filter:blur(0px) !important">
+                                    <p class="myOrginalFont">
+                                      در حال استعلام و دریافت اطلاعات از بیش از 10 سرویس برخط
+                                       
+                                      لطفا شکیبا باشید
+                                    </p>
+                                  </div>
+
+                                <div class="row display-tr">
+                                    <h3 class="panel-title text-secondary display-tdhead myOrginalFont">
+                                            {{headerTitle}}  
+                                    </h3>
+                                    <div class="display-td"></div>
+                                </div>
+                            </div>
+
+
+                        <div class="card-body myOrginalFont"   *ngIf=" status=='assignOrRemove'">
+                            
+                        </div>
+
+                            <div class="card-body myOrginalFont"    *ngIf="pageIndex==0 && status!=='assignOrRemove'" >
+                                <form  [formGroup]="requestForm" class="simple-form"  (keyup.enter)="onNextPage()">
+                  
+
+                                    <div class="row" [ngClass]="{'blur': sendDataToServer || isInquiryOfRequest}">
+                                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                                <label class="k-radio-label" for="radio3">نوع مشتری </label>
+                                                <br>
+                                                <app-customer-type [disableStatus]="mode === 'edit'" [(ngModel)]="initialParameter.customerType" (valueChanged)="customerTypeChangedValue($event?.id)"  formControlName="customerType" required ></app-customer-type>
+
+
+                                                <div *ngIf="submitted && ctrl.customerType.errors" class="invalid-feedback">
+                                                    <div *ngIf="submitted && ctrl.customerType.errors.required" class="fontColorError">فیلد نوع مشتری الزامی است</div>
+                                             </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                            <label class="k-radio-label" for="radio3">شناسه یکتا ({{uniqueLabel}})  </label>
+                                            <br>
+                                        <input type='text'  minlength="{{nationalCodeLength}}" maxlength="{{nationalCodeLength}}" [imask]="{mask:maskTxt }"    class="form-control numberDirection" formControlName="customerCode"  required
+                                        type="text" [(ngModel)]="initialParameter.nationalCode"    [attr.disabled]="mode === 'edit' ? '' : null" >
+                                            <div  >
+                                                <div   >
+                                                <p class="fontColorError myOrginalFont">   {{errorDescription}} </p>  
+                                                  
+                                                   </div>
+                                            </div>
+
+                                            <div *ngIf="submitted && ctrl.customerCode.errors" class="invalid-feedback">
+                                                <div *ngIf="submitted && ctrl.customerCode.errors.required" class="fontColorError">فیلد شناسه مشتری الزامی است</div>
+
+                                                <div *ngIf="ctrl.customerCode.errors.minlength">
+                                                    شناسه باید {{this.nationalCodeLength}} کاراکتر باشد
+                                                  </div>
+
+                                         </div>
+                                    </div>
+
+                                    </div>
+
+                                    <div class="row" [ngClass]="{'blur': sendDataToServer || isInquiryOfRequest}"  *ngIf="pageIndex==0" style="margin: 10px 2px">
+                   
+                                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                            <a (click)="onPerviousPage()" class="btn btn-danger btn-block btn-lg text-dark"> 
+                                                انصراف</a>
+                                        </div>
+            
+            
+                                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                            <a
+                                            (click)="onNextPage()"
+                                            [ngClass]="{'m-progress':sendDataToServer || isInquiryOfRequest,'not-active': !requestForm.valid}"
+                                            class="btn btn-success btn-lg btn-block text-dark">  
+                                            شروع
+                                        </a>
+            
+                                    </div>
+                                    
+                                        </div>
+
+                                </form>
+                            </div>
+
+                            <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==1  ">
+                                <app-legal-basic-information  *ngIf="this.customerTypeDescription === 'InteriorLegal'"  (clickedNext)="onNextPage()"    (clickedPrevious)="onPerviousPage()"    [legalBasicInformation]="this.requestInteriorLegal.legalBasicInformation"   ></app-legal-basic-information>
+                                <app-legal-basic-information  *ngIf="this.customerTypeDescription === 'Public'"  (clickedNext)="onNextPage()"    (clickedPrevious)="onPerviousPage()"    [legalBasicInformation]="this.requestPublic.legalBasicInformation"   ></app-legal-basic-information>
+                                <ngx-particulars-of-applicant *ngIf="this.customerTypeDescription === 'ExteriorIndividual'">  </ngx-particulars-of-applicant>
+                                <app-personal-details        *ngIf="this.customerTypeDescription === 'InteriorIndividual'"       (clickedNext)="onNextPage()"    (clickedPrevious)="onPerviousPage()" [personalDetailsInformation]="this.requestInteriorIndividual.personalDetails" >  </app-personal-details>
+                            </div>
+
+                             <div class="panel-body"  style="min-height: 800px;max-height: 800px" *ngIf="pageIndex==2 ">
+                                <app-address-details  *ngIf="this.customerTypeDescription === 'InteriorLegal'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.addressCollection" >  </app-address-details>
+                                <app-address-details  *ngIf="this.customerTypeDescription === 'Public'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.addressCollection" >  </app-address-details>
+                                <ngx-contact-information *ngIf="this.customerTypeDescription === 'ExteriorIndividual'">  </ngx-contact-information>
+                                <app-address-details  *ngIf="this.customerTypeDescription === 'InteriorIndividual'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorIndividual.addressCollection" >  </app-address-details>
+                            </div>
+
+                                <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==3  ">
+                                    <app-identity-management         *ngIf="this.customerTypeDescription === 'InteriorLegal'"      (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.identityCollection" ></app-identity-management>
+                                    <app-identity-management         *ngIf="this.customerTypeDescription === 'Public'"      (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.identityCollection" ></app-identity-management>
+                                    <ngx-applicant-employment-status *ngIf="this.customerTypeDescription === 'ExteriorIndividual'"> </ngx-applicant-employment-status>
+                                    <app-personal-working-details   *ngIf="this.customerTypeDescription === 'InteriorIndividual'"  (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [workingInfo]="this.requestInteriorIndividual.workingDetails" > </app-personal-working-details>
+                                </div>
+
+                                <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==4  ">
+                                         <app-bank-account-delegate *ngIf="this.customerTypeDescription === 'InteriorLegal'"       (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.bankAccountDelegateCollection"></app-bank-account-delegate>
+                                         <app-bank-account-delegate *ngIf="this.customerTypeDescription === 'Public'"       (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.bankAccountDelegateCollection"></app-bank-account-delegate>
+                                         <ngx-applicant-trading-ids *ngIf="this.customerTypeDescription === 'ExteriorIndividual'">  </ngx-applicant-trading-ids>
+                                         <app-identity-management   *ngIf="this.customerTypeDescription === 'InteriorIndividual'"  (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorIndividual.identityCollection" ></app-identity-management>
+                                </div>
+
+                                    <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==5  " >
+                                        <app-legal-people-with-voting-right  *ngIf="this.customerTypeDescription === 'InteriorLegal'"      (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.legalPeopleWithVotingRightCollection"></app-legal-people-with-voting-right>
+                                        <app-legal-people-with-voting-right  *ngIf="this.customerTypeDescription === 'Public'"      (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.legalPeopleWithVotingRightCollection"></app-legal-people-with-voting-right>
+                                        <ngx-applicant-financial-information *ngIf="this.customerTypeDescription === 'ExteriorIndividual'"></ngx-applicant-financial-information>
+                                        <app-personal-financial-details      *ngIf="this.customerTypeDescription === 'InteriorIndividual'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [financialDetail]="this.requestInteriorIndividual.financialDetails" ></app-personal-financial-details>
+                                   </div>
+
+                                   <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==6  ">
+                                    <app-stackeholders-informations *ngIf="this.customerTypeDescription === 'InteriorLegal'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.stockholdersInformationCollection"></app-stackeholders-informations>
+                                    <app-stackeholders-informations *ngIf="this.customerTypeDescription === 'Public'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.stockholdersInformationCollection"></app-stackeholders-informations>
+                                    <ngx-applicant-bank-account-information *ngIf="this.customerTypeDescription === 'ExteriorIndividual'"></ngx-applicant-bank-account-information>
+                                    <app-bank-details *ngIf="this.customerTypeDescription === 'InteriorIndividual'" (clickedSaveRequest)="saveRequest()" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorIndividual.bankDetails"  ></app-bank-details>
+                                    </div>
+
+                                    <div class="panel-body"   *ngIf="pageIndex==7  ">
+                                        
+                                        <app-legal-financial-details  *ngIf="this.customerTypeDescription === 'InteriorLegal'" [customerType]="this.customerType" (clickedNext)="onNextPage()" [financialDetail]="this.requestInteriorLegal.financialDetails"  (clickedPrevious)="onPerviousPage()"></app-legal-financial-details>
+                                        <app-legal-financial-details  *ngIf="this.customerTypeDescription === 'Public'" [customerType]="this.customerType" (clickedNext)="onNextPage()" [financialDetail]="this.requestPublic.financialDetails"  (clickedPrevious)="onPerviousPage()"></app-legal-financial-details>
+                                    </div>
+
+                                    <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==8  ">
+                                            <app-legal-production-informations *ngIf="this.customerTypeDescription === 'InteriorLegal'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.productionInformationCollection"></app-legal-production-informations>
+                                            <app-legal-production-informations *ngIf="this.customerTypeDescription === 'Public'" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.productionInformationCollection"></app-legal-production-informations>
+
+                                    </div>
+
+                                    <div class="panel-body"  style="min-height: 750px;max-height: 750px" *ngIf="pageIndex==9  ">
+                                            <app-bank-details *ngIf="this.customerTypeDescription === 'InteriorLegal'"   (clickedSaveRequest)="saveRequest()" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestInteriorLegal.bankDetails" ></app-bank-details>
+                                            <app-bank-details *ngIf="this.customerTypeDescription === 'Public'"   (clickedSaveRequest)="saveRequest()" (clickedNext)="onNextPage()"  (clickedPrevious)="onPerviousPage()" [gridDataCollection]="this.requestPublic.bankDetails" ></app-bank-details>
+
+                                    </div>
+
+                           
+
+                        </div>
+
+
+                        
+
+                    </ng-template>
+                </kendo-tabstrip-tab>
+            </kendo-tabstrip>
+        </div>
+    </div>
+</div>
+
+
+
+ 

@@ -1,0 +1,318 @@
+<form  [formGroup]="requestForm" class="simple-form"  (ngSubmit)="onSubmit()">
+     <div class="">
+         <div class="panel-heading clearfix">
+             <i class="icon-calendar"></i>
+             <h3 class="panel-title"></h3>
+         </div>
+
+         <div class="card-bodys">
+      
+
+                    <div class="row">
+
+                        <div class="col-lg-12 col-sm-12">
+
+                               
+
+
+                                      <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                 <span class="input-group-text spanGrp spanSmall ">نــــــام شــــرکـت</span>
+                                            </div>
+                                        <input type="text" formControlName="companyName" ngxOnlyPersianChars
+                                            required class="form-control inputGrp"  [(ngModel)]="legalBasicInformation.companyName" />
+                                      </div>
+
+
+                                 <div *ngIf="submitted &&  ctrl.companyName.errors" class="invalid-feedback">
+                                         <div *ngIf="submitted && ctrl.companyName.errors.required" class="fontColorError">فیلد نام الزامی است</div>
+                                 </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+             <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+ 
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">نـــوع فـعــالـیــت</span>
+                                </div>
+                                <app-zones-of-activity-combo-box class="width60" [(ngModel)]="legalBasicInformation.activityType"  required  formControlName="activityType"></app-zones-of-activity-combo-box>
+                          </div>
+                        <div *ngIf="submitted && ctrl.activityType.errors" class="invalid-feedback">
+                                 <div *ngIf="submitted && ctrl.activityType.errors.required" class="fontColorError">فیلد نوع فعالیت الزامی است</div>
+                         </div>
+                </div>
+
+                 <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                             <div class="input-group">
+                                    <div class="input-group-prepend">
+                                         <span class="input-group-text spanGrp spanSmall">شـخــصـیـت حقـوقـی</span>
+                             </div>
+                            <app-legal-type-combo-box class="width60" [(ngModel)]="legalBasicInformation.legalType"  required  formControlName="legalType"></app-legal-type-combo-box>
+                              </div>
+                        
+                             <div *ngIf="submitted && ctrl.legalType.errors" class="invalid-feedback">
+                                      <div *ngIf="submitted && ctrl.legalType.errors.required" class="fontColorError">فیلد نوع شخصیت حقوقی الزامی است</div>
+                              </div>
+                     </div>
+                 </div>
+
+             <br />
+
+
+             <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+
+
+                         <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">شــمـــاره ثــــبت</span>
+                                </div>
+                                <input type="text" formControlName="registerNumber" [(ngModel)]="legalBasicInformation.registerNumber"   numbersOnly required  
+                                class="form-control inputGrp numberDirection" [imask]="{mask: '00000000000000'}" />
+                          </div>
+
+                          <div *ngIf=" ctrl.registerNumber.errors?.minlength" class="fontColorError">
+                                حداقل شماره ثبت باید یک رقم باشد
+                         </div> 
+
+
+                         <div *ngIf=" ctrl.registerNumber.errors?.maxlength" class="fontColorError">
+                                 حداکثری شماره ثبت باید بیست رقم باشد
+                          </div> 
+
+                          <div *ngIf="submitted && ctrl.registerNumber.errors" class="invalid-feedback">
+                                <div *ngIf="submitted && ctrl.registerNumber.errors.required" class="fontColorError">فیلد شماره ثبت الزامی است</div>
+                        </div>
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">مـــحــــل ثــــبـــت</span>
+                         </div>
+                         <app-city-combo-box class="width60" [(ngModel)]="legalBasicInformation.registerCity" required  formControlName="registerCity"></app-city-combo-box>
+                          </div>
+
+                        <div *ngIf="submitted && ctrl.registerCity.errors" class="invalid-feedback">
+                                 <div *ngIf="submitted && ctrl.registerCity.errors.required" class="fontColorError">فیلد محل ثبت الزامی است</div>
+                         </div>
+                </div>
+             </div>
+             <br />
+
+             <div class="row">
+
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <span class="input-group-text spanGrp spanSmall">شـــناسـه مـــــلی</span>
+                                        </div>
+                                    <input type="text" [(ngModel)]="legalBasicInformation.nationalCode"  disabled=true  formControlName="nationalCode" required class="form-control inputGrp numberDirection" />
+                                  </div>
+
+
+                                <div *ngIf="submitted && ctrl.nationalCode.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && ctrl.nationalCode.errors.required" class="fontColorError">فیلد شناسه ملی الزامی است</div>
+                                 </div>
+                    </div>
+
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+               
+
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">کــــــد اقـــتـــصادی</span>
+                                </div>
+                                <input type="text"  [(ngModel)]="legalBasicInformation.economicCode"   formControlName="economicCode" required 
+                                class="form-control inputGrp numberDirection" [imask]="{mask: '000000000000'}" />
+                            
+                          </div>
+
+                          <div *ngIf=" ctrl.economicCode.errors?.minlength" class="fontColorError">
+                                کد اقتصادی باید 12 رقم باشد
+                         </div> 
+
+
+                         <div *ngIf=" ctrl.economicCode.errors?.maxlength" class="fontColorError">
+                                کد اقتصادی باید 12 رقم باشد
+                          </div> 
+                    
+                        <div *ngIf="submitted && ctrl.economicCode.errors" class="invalid-feedback">
+                                <div *ngIf="submitted && ctrl.economicCode.errors.required" class="fontColorError">فیلد کد اقتصادی الزامی است</div>
+                         </div>
+                </div>
+
+
+                </div>
+                <br />
+
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+
+                            <div class="input-group">
+                                    <div class="input-group-prepend">
+                                         <span class="input-group-text spanGrp spanSmall">تــابــــعــــیـــت</span>
+                                    </div>
+                                <app-country-combo-box class="width60" [(ngModel)]="legalBasicInformation.nationality" required  formControlName="nationality"></app-country-combo-box>
+
+                              </div>
+
+                            <div *ngIf="submitted && ctrl.nationality.errors" class="invalid-feedback">
+                                    <div *ngIf="submitted && ctrl.nationality.errors.required" class="fontColorError">فیلد تابعیت الزامی است</div>
+                             </div>
+
+                    </div>
+
+
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+
+
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span   class="input-group-text spanGrp spanSmall">تــــاریـــخ تاسـبـــس</span>
+                                     <ngx-imepersian-date-picker   
+                                   
+                                     formControlName="registerDate"
+                                     [(ngModel)]="this.legalBasicInformation.registerDate">
+                                    </ngx-imepersian-date-picker>
+                             </div>
+                          </div>
+                 
+ 
+                        <div *ngIf="submitted && ctrl.dateObject.errors" class="invalid-feedback">
+                                <div *ngIf="submitted && ctrl.dateObject.errors.required" class="fontColorError">فیلد تاریخ تاسیس الزامی است</div>
+                         </div>
+            </div>
+
+                 </div>
+    
+               <br />
+
+             <div class="row">
+
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                <div class="can-toggle">
+                                        <input id="a" type="checkbox" formControlName="isLocatedInFreeZones"     [(ngModel)]="legalBasicInformation.isLocatedInFreeZones" >
+                                        <label for="a">
+                                        <div class="can-toggle__label-text">واقع در منطقه آزاد تجاری و صنعتی ؟</div>
+
+                                        <div class="can-toggle__switch" data-checked="بلی" data-unchecked="خیر"></div>
+                                        </label>
+                                 </div> 
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text spanGrp spanSmall">لــیـست مـنـــاطق آزاد</span>
+                                    </div>
+                                    <app-free-zones-combo-box class="width60" formControlName="freeZone" [disableStatus]="!legalBasicInformation.isLocatedInFreeZones"  [(ngModel)]="legalBasicInformation.freeZone" ></app-free-zones-combo-box>
+                                    <p class="fontColorError myOrginalFont">{{errorMsgLocatedInFreeZones}}</p>
+
+                                </div>
+
+                      </div>
+ 
+
+
+
+            </div>
+
+                <br />
+
+                <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="can-toggle">
+                                            <input id="b" type="checkbox" formControlName="isLocatedInSpecialEconomicZones"  [(ngModel)]="legalBasicInformation.isLocatedInSpecialZones">
+                                            <label for="b">
+                                            <div class="can-toggle__label-text">واقع در منطقه ویژه اقتصادی ؟</div>
+
+                                            <div class="can-toggle__switch" data-checked="بلی" data-unchecked="خیر"></div>
+                                            </label>
+                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                            <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text spanGrp spanSmall">لـیـست مـنـاطق ویــژه</span>
+                                            </div>
+                                            <ngx-special-zones-combo-box class="width60" [disableStatus]="!legalBasicInformation.isLocatedInSpecialZones" formControlName="specialEconomicZones"  [(ngModel)]="legalBasicInformation.specialZone" ></ngx-special-zones-combo-box>
+
+                                            <p class="fontColorError myOrginalFont">{{errorMsgLocatedInSpecialEconomicZones}}</p>
+                                        </div>
+                                    </div>
+
+               </div>
+
+               <br /> 
+               <div class="row">
+                 <div class="col-lg-12 col-sm-12">
+                   <div class="input-group">
+                     <div class="input-group-prepend">
+                       <span class="input-group-text spanGrp  spanSmall">
+                         نحوه امضا اسناد تعهدآور
+                       </span>
+                     </div>
+       
+                     <textarea
+                       rows="4"
+                       cols="50"
+                       class="form-control inputGrp"
+                       formControlName="signingProcedure"
+                       [(ngModel)]="legalBasicInformation.signingProcedure"
+                       required
+                       class="form-control"
+                       ngxOnlyPersianChars
+                     ></textarea>
+                   </div>
+       
+                   <div
+                     *ngIf="submitted && ctrl.signingProcedure.errors"
+                     class="invalid-feedback"
+                   >
+                     <div
+                       *ngIf="submitted && ctrl.signingProcedure.errors.required"
+                       class="fontColorError"
+                     >
+                       فیلد نحوه امضا اسناد تعهدآور الزامی است
+                     </div>
+                   </div>
+                 </div>
+               </div>
+
+
+
+
+         <br />
+         <p class="fontColorError myOrginalFont">{{errorMsg}}</p>
+
+         <div class="row">
+         
+                 <div class="col-xs-6 col-md-6">
+                     <a (click)="onPrevious()" class="btn btn-danger btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                        مرحله قبل</a>
+                 </div>
+
+                 <div class="col-xs-6 col-md-6">
+                        <a
+                            (click)="onSubmit()"
+                            [ngClass]="{ 'not-active': !requestForm.valid }"
+                            class="btn btn-success btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                            مرحله بعد
+                    </a>
+                    </div>
+
+          </div>
+          
+        </div>
+         <br />
+         </div>
+         </form>

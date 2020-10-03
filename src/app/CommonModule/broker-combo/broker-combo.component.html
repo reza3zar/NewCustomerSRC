@@ -1,0 +1,12 @@
+<kendo-combobox
+    [data]="dataBrokers"
+    [textField]="'name'"
+    [valueField]="'brokerId'"
+    [filterable]="true"
+    [disabled]=disabled
+    (filterChange)="handleFilterBrokers($event)"
+    name="BrokerName"
+    [(ngModel)]="value"
+    [placeholder]="'نام کارگزار'"
+>
+</kendo-combobox>

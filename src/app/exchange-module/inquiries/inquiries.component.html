@@ -1,0 +1,231 @@
+
+<div *ngIf="!pageIsloaded">
+  <ngx-skeleton-loading-bars></ngx-skeleton-loading-bars>
+</div>
+
+<div *ngIf="pageIsloaded" class="cards">
+
+  <div class="card">
+    <img class="card__image" src="../../../assets/images/tax.jpg" alt="wave" />
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          مودیان مالیاتی
+          <small>دریافت اطلاعات از اداره مالیات</small>
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" (click)="redirectToAddress('/exchange/Inquiry')">شروع استعلام</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="card">
+    <img class="card__image" src="../../../assets/images/legal.png" alt="beach" />
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+        اشخاص حقوقی
+        <small>دریافت اطلاعات از اداره ثبت شرکت‌ها</small>
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" (click)="redirectToAddress('/exchange/InquiryLegalPerson')">شروع استعلام</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card__image" src="../../../assets/images/warehouse.jpg" alt="mountain" />
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+           انبارها 
+        <small>دریافت اطلاعات از وزارت صنعت</small>
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" style="margin-bottom: 7px;" (click)="redirectToAddress('/exchange/InquiryDepository')">شروع استعلام با کدپستی</a>
+          <a  class="btn" (click)="redirectToAddress('/exchange/InquiryDepositoryByNationalId')"> شروع استعلام با کدملی</a>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card__image" src="../../../assets/images/fida.png" alt="mountain" />
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          کد فیدا
+        <small>دریافت اطلاعات از پژواک</small>
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" style="margin-bottom: 7px;" (click)="redirectToAddress('/exchange/InquiryFidaNaturalPerson')">شروع استعلام حقیقی</a>
+          <a  class="btn" (click)="redirectToAddress('/exchange/InquiryFidaLegalPerson')"> شروع استعلام حقوقی</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card__image" src="../../../assets/images/phone.jpg" alt="mountain" />
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          شماره همراه
+        <small>دریافت اطلاعات از رایان بورس</small>
+           
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" style="margin-bottom: 7px;" (click)="redirectToAddress('/exchange/InquiryCellInfoIndividual')">شروع استعلام حقیقی</a>
+          <a  class="btn" (click)="redirectToAddress('/exchange/InquiryCellInfoLegal')"> شروع استعلام حقوقی</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card__image" src="../../../assets/images/14.png" alt="kite" />
+
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+        بهین‌ یاب
+        <small>دریافت اطلاعات از وزارت صنعت</small>
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" (click)="redirectToAddress('/exchange/exchange/InquiryBehinyabInfo')"> شروع استعلام  </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+      <img class="card__image" src="../../../assets/images/BEHIN.png" alt="river" />
+
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          کد 14 رقمی
+        <small>دریافت اطلاعات از مدیریت فناوری</small>
+          
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" (click)="redirectToAddress('/exchange/exchange/InquiryEx14Code')"> شروع استعلام  </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <img class="card__image" src="../../../assets/images/LICENSE.png" alt="underwater" />
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          پروانه بهره برداری
+        <small>دریافت اطلاعات از وزارت صنعت</small>
+          
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" (click)="redirectToAddress('/exchange/InquiryLicenseInfo')"> شروع استعلام  </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card__image" src="../../../assets/images/Leadership-Coaching.jpg" alt="underwater" />
+    <div class="card-title">
+      <a  class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          اظهارنامه مالیاتی
+        <small>دریافت اطلاعات از وزارت اقتصاد</small>
+          
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a  class="btn" (click)="redirectToAddress('/exchange/incomeTaxReturn')"> شروع استعلام  </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+

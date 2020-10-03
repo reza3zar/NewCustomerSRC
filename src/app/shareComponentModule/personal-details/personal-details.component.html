@@ -1,0 +1,301 @@
+<form  [formGroup]="requestForm" class="simple-form container" (keyup.enter)="onSubmit()"  (ngSubmit)="onSubmit()">
+     <div class="panel panel-info">
+         <div class="panel-heading clearfix">
+             <i class="icon-calendar"></i>
+             <h3 class="panel-title"></h3>
+         </div>
+
+         <div class="card-bodys">
+ 
+             <div class="row">
+                 <div class="col-lg-6 col-sm-12">
+                  
+                         <div class="input-group"> 
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">  نـــــــــــــام</span>
+                                </div>
+                            <input type="text" formControlName="firstName" lang='fa'  ngxOnlyPersianChars   [(ngModel)]="personalDetailsInformation.firstName"
+                            required class="form-control inputGrp"   />
+                        </div>
+
+                          <div *ngIf="submitted &&  ctrl?.firstName?.errors" class="invalid-feedback">
+                                  <div *ngIf="submitted && ctrl?.firstName?.errors?.required" class="fontColorError">فیلد نام الزامی است</div>
+                          </div>
+                 </div>
+
+                 <div class="col-lg-6 col-sm-12">
+                    
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall"> نــام خــانـوادگـی</span>
+                                </div>
+                            <input type="text" formControlName="lastName" [(ngModel)]="personalDetailsInformation.lastName"  ngxOnlyPersianChars  required class="form-control inputGrp" />
+                        </div>
+
+                
+                             <div *ngIf="submitted && ctrl?.lastName?.errors" class="invalid-feedback">
+                                      <div *ngIf="submitted && ctrl?.lastName?.errors?.required" class="fontColorError">فیلد نام خانوادگی الزامی است</div>
+                              </div>
+                     </div>
+                 </div>
+
+             <br />
+
+
+             <div class="row">
+                <div class="col-lg-6 col-sm-12">
+
+                
+
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">  نـــــام پــــدر</span>
+                                </div>
+                            <input type="text" formControlName="fatherName"  [(ngModel)]="personalDetailsInformation.fatherName" ngxOnlyPersianChars  required  class="form-control inputGrp" />
+                        </div>
+
+                        <div *ngIf="submitted && ctrl?.fatherName?.errors" class="invalid-feedback">
+                                 <div *ngIf="submitted && ctrl?.fatherName?.errors?.required" class="fontColorError">فیلد نام پدر الزامی است</div>
+                         </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+
+                  
+
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">  شمـاره شـنـاسنامه</span>
+                                </div>
+                            <input type="text" formControlName="identificationNumber"  [(ngModel)]="personalDetailsInformation.identificationNumber"  [imask]="{mask: '0000000000000'}" required  class="form-control inputGrp numberDirection" />
+                        </div>
+
+                        <div *ngIf="submitted && ctrl?.identificationNumber?.errors" class="invalid-feedback">
+                                 <div *ngIf="submitted && ctrl?.identificationNumber?.errors?.required" class="fontColorError">فیلد شماره شناسنامه الزامی است</div>
+                         </div>
+                </div>
+             </div>
+             <br />
+
+
+       
+
+             <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall"> سری شنـاسنامه</span>
+                                </div>
+                            <input type="text" [(ngModel)]="personalDetailsInformation.serial" required  [imask]="{mask: '000000'}"
+                            formControlName="serialIdentification" class="form-control inputGrp numberDirection" />
+                        </div>
+
+
+
+                        
+                        <div *ngIf=" ctrl?.serialIdentification?.errors?.minlength" class="fontColorError">
+                                حداقل سری عدد شناسنامه باید شش رقم باشد
+                         </div> 
+
+
+                         <div *ngIf=" ctrl?.serialIdentification?.errors?.maxlength" class="fontColorError">
+                                 حداکثری سری عدد شناسنامه باید شش رقم باشد
+                          </div> 
+
+                                <div *ngIf="submitted && ctrl?.serialIdentification?.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && ctrl?.serialIdentification?.errors?.required" class="fontColorError">فیلد سری شناسنامه الزامی است</div>
+                                 </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <span class="input-group-text spanGrp spanSmall">  کـــــــد مــــلـی</span>
+                                        </div>
+                                    <input type="text" disabled=true [(ngModel)]="personalDetailsInformation.nationalCode" formControlName="nationalCode" required class="form-control inputGrp" />
+                                </div>
+
+                                <div *ngIf="submitted && ctrl?.nationalCode?.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && ctrl?.nationalCode?.errors?.required" class="fontColorError">فیلد کد ملی الزامی است</div>
+                                 </div>
+                    </div>
+             </div>
+                <br />
+                <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                                    <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                 <span class="input-group-text spanGrp spanSmall"> س.ع.شناسنامه </span>
+                                            </div>
+                                        <input type="text" minlength="1" maxlength="2"  [(ngModel)]="personalDetailsInformation.digitalSeries" [imask]="{mask: '00'}" formControlName="digitalSeries" required class="form-control inputGrp numberDirection" />
+                                    </div>
+        
+                                    <div *ngIf=" ctrl?.digitalSeries?.errors?.minlength" class="fontColorError">
+                                           حداقل سری عدد شناسنامه باید یک رقم باشد
+                                    </div> 
+        
+        
+                                    <div *ngIf=" ctrl?.digitalSeries?.errors?.maxlength" class="fontColorError">
+                                            حداکثری سری عدد شناسنامه باید دو رقم باشد
+                                     </div> 
+        
+                                    <div *ngIf="submitted && ctrl?.digitalSeries?.errors" class="invalid-feedback">
+                                            <div *ngIf="submitted && ctrl?.digitalSeries?.errors?.required" class="fontColorError">فیلد سـری عددی شناسنامه الزامی است</div>
+                                     </div>
+                        </div>
+        
+                        <div class="col-lg-6 col-sm-12">
+                                        <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                     <span class="input-group-text spanGrp spanSmall">س.حرفی شناسنامه   </span>
+                                                </div>
+                                <ngx-series-letter-combo-box class="width60" [(ngModel)]="personalDetailsInformation.letterSeries" required  formControlName="letterSeries"></ngx-series-letter-combo-box>
+                                        </div>
+        
+                                        <div *ngIf="submitted && ctrl?.letterSeries?.errors" class="invalid-feedback">
+                                                <div *ngIf="submitted && ctrl?.letterSeries?.errors?.required" class="fontColorError">فیلد سـری حرفی شناسنامه الزامی است</div>
+                                         </div>
+                            </div>
+                 </div>
+                 <br />
+
+                 <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                                    <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                 <span class="input-group-text spanGrp spanSmall">  کــد اقـتصادی </span>
+                                            </div>
+                                        <input type="text"   [(ngModel)]="personalDetailsInformation.economicCode"  formControlName="economicCode"   class="form-control inputGrp numberDirection" />
+                                    </div>
+        
+                          
+                        </div>
+        
+                        <div class="col-lg-6 col-sm-12">
+                                <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text spanGrp spanSmall">  وضعـــیت تــاهل  </span>
+                                   </div>
+                         <ngx-martials class="width60" required formControlName="martial" [(ngModel)]="personalDetailsInformation.maritalStatus"></ngx-martials>
+                            </div>
+                        </div>
+
+                 </div>
+                 <br />
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-sm-12">
+
+
+                        <div class="input-group">
+ 
+
+
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <span class="input-group-text spanGrp spanSmall"> مـحل صــدور</span>
+                                        </div>
+                                       <app-city-combo-box  class="width60" [(ngModel)]="personalDetailsInformation.registerCity"  required  formControlName="registerCity"></app-city-combo-box>
+                                </div>
+
+
+                                <div *ngIf="submitted && ctrl?.registerCity?.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && ctrl?.registerCity?.errors?.required" class="fontColorError">فیلد محل صدور الزامی است</div>
+                                 </div>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12">
+
+
+                        <div class="input-group">
+ 
+
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <span class="input-group-text spanGrp spanSmall">تــابــــعـیــــت</span>
+                                        </div>
+                                    <app-country-combo-box class="width60" [(ngModel)]="personalDetailsInformation.nationality"  required  formControlName="nationality"></app-country-combo-box>
+                                </div>
+
+
+                                <div *ngIf="submitted && ctrl?.nationality?.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && ctrl?.nationality?.errors?.required" class="fontColorError">فیلد تابعیت الزامی است</div>
+                                 </div>
+                    </div>
+                    </div>
+
+                 </div>
+                 <br />
+
+
+             <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+
+
+                        <div class="input-group">
+
+                        
+
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <span class="input-group-text spanGrp spanSmall">جـنـسـیـــت</span>
+                                        </div>
+                                        <app-gender-combo-box class="width60" [(ngModel)]="personalDetailsInformation.gender"  required  formControlName="gender"></app-gender-combo-box>
+                                </div>
+
+                                <div *ngIf="submitted && ctrl?.gender?.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && ctrl?.gender?.errors?.required" class="fontColorError">فیلد جنسیت الزامی است</div>
+                                 </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                   
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                     <span class="input-group-text spanGrp spanSmall">    تــاریــخ تــولــد   </span>
+                                </div>
+
+                                <ngx-imepersian-date-picker class="width60" formControlName="birthDate" [(ngModel)]="personalDetailsInformation.birthDate"></ngx-imepersian-date-picker>
+
+                        </div>
+
+                    <div *ngIf="submitted && ctrl?.birthDate?.errors" class="invalid-feedback">
+                            <div *ngIf="submitted && ctrl?.birthDate?.errors?.required" class="fontColorError">فیلد تاریخ تولد الزامی است</div>
+                    </div>
+
+                </div>
+                    </div>
+
+                <br />
+
+
+
+
+         </div>
+         <br />
+
+     
+
+  
+
+         <div class="row">
+    
+                <div class="col-xs-6 col-md-6">
+                    <a (click)="onPrevious()" class="btn btn-danger btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                       مرحله قبل</a>
+                </div>
+
+                <div class="col-xs-6 col-md-6">
+                        <a
+                            (click)="onSubmit()"
+                            [ngClass]="{ 'not-active': !requestForm.valid }"
+    
+                            class="btn btn-success btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                            مرحله بعد
+                    </a>
+                    </div>
+        </div>
+
+         <br />
+         </div>
+         </form>

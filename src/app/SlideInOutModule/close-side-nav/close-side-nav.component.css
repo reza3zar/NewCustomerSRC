@@ -1,0 +1,91 @@
+
+.circCont {
+    display: inline-block;
+  }
+  
+  .circle {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 4px solid black;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    margin: 2px 4px;
+  }
+  .circle:after {
+    width: 24px;
+    height: 4px;
+    background-color: black;
+    content: "";
+    left: 50%;
+    top: 50%;
+    margin-left: -12px;
+    margin-top: -2px;
+    position: absolute;
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    /*@include transform-origin(100%,100%);*/
+  }
+  .circle:before {
+    left: 50%;
+    top: 50%;
+    margin-left: -12px;
+    margin-top: -2px;
+    width: 24px;
+    height: 4px;
+    background-color: black;
+    content: "";
+    position: absolute;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    /*@include transform-origin(0%,0%);*/
+  }
+  
+  
+  .boxShadow {
+    -moz-transition: box-shadow 200ms ease-out, -moz-transform 200ms ease-out, opacity 200ms ease-in-out;
+    -o-transition: box-shadow 200ms ease-out, -o-transform 200ms ease-out, opacity 200ms ease-in-out;
+    -webkit-transition: box-shadow 200ms ease-out, -webkit-transform 200ms ease-out, opacity 200ms ease-in-out;
+    transition: box-shadow 200ms ease-out, transform 200ms ease-out, opacity 200ms ease-in-out;
+  }
+  .boxShadow:after, .boxShadow:before {
+    -moz-transition: linear 400ms;
+    -o-transition: linear 400ms;
+    -webkit-transition: linear 400ms;
+    transition: linear 400ms;
+  }
+  
+  .boxShadow:hover:not(.fadeOut) {
+    -moz-box-shadow: 0px 0px 0px 20px #e91e63 inset;
+    -webkit-box-shadow: 0px 0px 0px 20px #e91e63 inset;
+    box-shadow: 0px 0px 0px 20px #e91e63 inset;
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  .boxShadow:hover:not(.fadeOut):after {
+    background-color: #fff;
+    -moz-transform: rotate(-45deg) scale(0.6);
+    -ms-transform: rotate(-45deg) scale(0.6);
+    -webkit-transform: rotate(-45deg) scale(0.6);
+    transform: rotate(-45deg) scale(0.6);
+  }
+  .boxShadow:hover:not(.fadeOut):before {
+    background-color: #fff;
+    -moz-transform: rotate(45deg) scale(0.6);
+    -ms-transform: rotate(45deg) scale(0.6);
+    -webkit-transform: rotate(45deg) scale(0.6);
+    transform: rotate(45deg) scale(0.6);
+  }
+  
+  
+  

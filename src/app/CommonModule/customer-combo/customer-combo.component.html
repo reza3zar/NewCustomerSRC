@@ -1,0 +1,15 @@
+<kendo-combobox  
+    [data]="dataCustomers"
+    [textField]="'name'"
+    [valueField]="'customerId'"
+    [filterable]="true"
+    [(ngModel)]="value"
+    name="customerName"
+    [disabled]=disabled
+    (filterChange)="handleFilterCustomers($event)"
+    [placeholder]="'نام مشتری'"
+>
+
+
+
+</kendo-combobox>

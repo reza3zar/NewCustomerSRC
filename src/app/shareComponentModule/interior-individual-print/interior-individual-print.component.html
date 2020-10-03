@@ -1,0 +1,16 @@
+
+<div class="container">
+  <div class="example-config">
+      <button kendo-button (click)="pdf.saveAs('invoice.pdf')">
+        Save As PDF...
+      </button>
+    </div>
+ 
+  <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+  <p style="font-family: 'IRANSans'">
+      آیا تا به حال لیستی از دیتا داشته‌اید که بخواهید بر روی آنها کاری را انجام دهید؟ مثلا لیستی از مشتریان که باید برای تک تک آنها Pdf ای را بسازید، یا لیستی از مشتریان که باید برای تک تک آنها بیمه نامه صادر کنید، یا مثلا لیست اطلاعات بلیط‌های قابل فروش را گرفته‌اید و برای تک تک آنها می‌خواهید کمیسیون حساب کنید و ...
+  </p>
+  </kendo-pdf-export>
+
+</div>
+ 

@@ -1,0 +1,32 @@
+<!-- <div class="tree">
+  <ul class="vertical" >
+      <li *ngFor="let node of nodes"><a   class="fnt">{{node.evidence.name}}</a></li>
+  </ul>
+</div>   -->
+
+
+
+ 
+    <div class="entry" *ngFor="let node of nodes"><span [ngClass]="{'forbiden': node.evidenceStatus.id==3}" class="label fnt open" (click)="nodeClicked(node.evidence.id)"  >
+      {{node.evidence.name}}  
+      <div style="float: inline-end; display: inline;">
+          <!-- <img style="margin: 0px 1px;" *ngIf="node.exists"  src="../../../../assets/images/checked.png" width="24">
+          <img style="margin: 0px 1px;" *ngIf="!node.exists"  src="../../../../assets/images/forbidden.png" width="24"> -->
+
+          <img style="margin: 0px 1px;"  nbTooltip="فایلی یافت نشد" nbTooltipStatus="danger"  *ngIf="!checkNodeIsExist(node.evidence.id)  && node.evidenceStatus.id!=3" src="../../../../assets/images/declined.png" width="28">
+          <img style="margin: 0px 1px;"  nbTooltip="دارای فایل " nbTooltipStatus="success"  *ngIf="checkNodeIsExist(node.evidence.id) && node.evidenceStatus.id!=3" src="../../../../assets/images/accepted.png" width="28">
+ 
+          <img style="margin: 0px 1px;"  nbTooltip="الزامی " nbTooltipStatus="warning"   *ngIf="node.evidenceStatus.id==1 && node.evidenceStatus.id!=3" src="../../../../assets/images/star.png" width="28">
+
+      </div>
+
+    </span>
+
+    </div>
+ 
+ 
+
+
+
+
+ 

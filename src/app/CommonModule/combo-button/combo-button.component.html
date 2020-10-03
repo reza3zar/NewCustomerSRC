@@ -1,0 +1,40 @@
+<div  [ngClass]="{'combo-select--active': isClicked}"   [ngClass]="{'combo-select': !isClicked}"   style="position: absolute;margin: -10px auto;">
+  <button class="button combo-select__button"  [disabled]="disabledCtrl" (click)="changeListStatus()"  > 
+    <!-- [disabled]="disabledCtrl" -->
+    <span  class="combo-select__text"  >انتخاب عملیات</span>
+    <span [ngClass]="{'spinner-grow spinner-grow-sm': watingForGetPdf} "   ></span>
+    <span class="combo-select__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+        <title>ctrl-down</title>
+        <g stroke-width="1" fill="#111111" stroke="#111111">
+          <polyline points="0.5 4.5 6 8.5 11.5 4.5" fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round"></polyline>
+        </g>
+      </svg>
+    </span>
+  </button>
+  <div class="combo-select__menu-wrapper">
+    <ul class="combo-select__menu">
+
+
+ 
+
+      <li class="combo-select__item" *ngFor="let collectionItem of collections">
+        <span (click)="comboItemClicked(collectionItem)">{{collectionItem.item.name}}</span>
+        <div class="combo-select__download-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+            <title>move-layer-down</title>
+            <g fill="#009EEF">
+              <path fill="#009EEF" d="M8,12c0.3,0,0.5-0.1,0.7-0.3L14.4,6L13,4.6l-4,4V0H7v8.6l-4-4L1.6,6l5.7,5.7C7.5,11.9,7.7,12,8,12z"></path>
+              <rect x="1" y="14" width="14" height="2"></rect>
+            </g>
+          </svg></div>
+      </li>
+
+
+ 
+
+     
+    </ul>
+  </div>
+</div>
+<br />
+ 

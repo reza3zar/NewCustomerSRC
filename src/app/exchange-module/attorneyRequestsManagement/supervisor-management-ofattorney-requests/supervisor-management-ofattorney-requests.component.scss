@@ -1,0 +1,402 @@
+.k-i-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 64px;
+  /* background-color: rgba(255,255,255,.3); */
+  color: #ff6757;
+}
+
+
+
+.colorWhite{
+  color: white !important;
+}
+
+
+.dialog-Btn {
+  margin: 2px;
+}
+
+.btnBlack{
+  background: black !important
+}
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
+@font-face {
+  font-family: "ico";
+  src: url(data:font/opentype;base64,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) format('embedded-opentype'), url(data:application/x-font-ttf;base64,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) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.ui-combobox,
+.ui-combobox * {
+  outline: 0 none;
+  text-overflow: ellipsis;
+}
+.ui-combobox {
+  font-family: sans-serif;
+  display: inline-block;
+  position: relative;
+  line-height: normal;
+  user-select: none;
+  text-align: left;
+  color: #88a6b6;
+}
+.ui-combobox * {
+  font-style: normal;
+  vertical-align: middle;
+}
+.ui-combobox:after,
+.ui-combobox.ui-combobox-filter:before,
+.ui-combobox.ui-combobox-search:before {
+  font-family: "ico";
+  
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+  position: absolute;
+  line-height: 0;
+  z-index: 10;
+  top: 50%;
+}
+.ui-combobox:after {
+  content: "\e60a";
+  font-size: 2.2em;
+  right: 0.3em;
+}
+.ui-combobox.ui-combobox-filter:before {
+  content: "\e611";
+  font-size: 1.4em;
+  left: 1em;
+}
+.ui-combobox.ui-combobox-search:before {
+  content: "\f002";
+  pointer-events: none;
+  font-size: 1.2em;
+  z-index: 12;
+  left: 1em;
+  color: #31a0e7;
+}
+.ui-combobox.ui-combobox-search:after {
+  content: "\e117";
+  pointer-events: none;
+  font-size: 1.1em;
+  right: 1em;
+  line-height: 1em;
+  margin-top: -0.5em;
+  font-weight: bold;
+  background: #eaeaea;
+}
+.ui-combobox:hover {
+  z-index: 2000;
+}
+.ui-combobox.ui-combobox-expanded {
+  z-index: 1000;
+}
+.ui-combobox > .ui-value[required]:empty {
+  box-shadow: 0 0 0 2px #e99;
+  border-color: transparent;
+  background: rgba(255, 0, 0, 0.1);
+}
+.ui-combobox:hover > .ui-value[required]:empty {
+  background: #fff;
+}
+.ui-combobox:hover > .ui-value,
+.ui-combobox:hover:before,
+.ui-combobox:hover:after,
+.ui-combobox > .ui-value[count]:not([multiple]):not([count=""]):not([count="0"]):not([count="1"]):before,
+.ui-combobox > .ui-value:not(:empty) {
+  color: #31a0e7;
+}
+.ui-combobox > .ui-value[placeholder]:not([placeholder=""]):empty:before {
+  content: attr(placeholder);
+  font-size: inherit;
+  color: inherit;
+  position: static;
+  line-height: inherit;
+}
+.ui-combobox > .ui-value[count]:not([multiple]):not([count=""]):not([count="0"]):not([count="1"]):before {
+  content: attr(count-prefix) attr(count) attr(count-suffix);
+  font-size: inherit;
+  color: inherit;
+  position: static;
+  line-height: inherit;
+}
+.ui-combobox > .ui-value[count]:not([multiple]):not([count=""]):not([count="0"]):not([count="1"]) > * {
+  display: none;
+}
+.ui-combobox > .ui-value > * {
+  cursor: pointer;
+}
+.ui-combobox > .ui-value {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  padding: 0.93em 3.3em 0.93em 1.2em;
+  border: 1px solid #e4ebec;
+  border-radius: 0.214em;
+  color: #88a6b6;
+  background: #fff;
+  z-index: 5;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ui-combobox.ui-combobox-filter > .ui-value {
+  padding: 0.93em 3.3em 0.93em 3.6em;
+}
+.ui-combobox.ui-combobox-search > .ui-value {
+  padding: 0.93em 3.3em 0.93em 3.2em;
+  background: #eaeaea;
+  border-color: #ddd;
+}
+.ui-combobox:hover > .ui-value,
+.ui-combobox > input.ui-match:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]):not([type=file]):focus ~ .ui-value {
+  box-shadow: 0 0 0 2px #31a0e7;
+  border-color: transparent;
+}
+.ui-combobox > input.ui-match:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]):not([type=file]) {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  opacity: 0;
+  z-index: 10;
+  width: 100%;
+  border: 0 none;
+  outline: 0 none;
+  box-shadow: none;
+  background: transparent;
+  box-sizing: border-box;
+  font-size: inherit;
+  padding: 0.93em 3.3em 0.93em 1.2em;
+  border-radius: 0.3em;
+}
+.ui-combobox > input.ui-match:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]):not([type=file]):focus {
+  opacity: 1;
+  background: #fff;
+}
+.ui-combobox.ui-combobox-search > input.ui-match:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]):not([type=file]) {
+  padding: 0.93em 1.1em 0.93em 3.3em;
+  background: #eaeaea;
+}
+.ui-combobox > .ui-options {
+  display: block;
+  position: absolute;
+  border: 1px solid #e3e3e3;
+  border-radius: 0.2857em;
+  min-width: 110%;
+  background: #fff;
+  padding: 0.4em 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  margin-top: -0.357em;
+  left: 50%;
+  transform-origin: center bottom;
+  perspective-origin: center bottom;
+  transform: perspective(500px) translateX(-50%) translateY(-100%) rotateX(70deg);
+  opacity: 0;
+  transition: all 0.3s, opacity 0.15s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.ui-combobox.ui-combobox-options-left > .ui-options {
+  transform: perspective(500px) translateY(-100%) rotateX(70deg);
+  left: -5%;
+}
+.ui-combobox.ui-combobox-options-right > .ui-options {
+  transform: perspective(500px) translateY(-100%) rotateX(70deg);
+  left: auto;
+  right: -5%;
+}
+.ui-combobox:not(.ui-combobox-collapsed):hover > .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox:not(.ui-combobox-collapsed) > .ui-match:not([disabled]):focus ~ .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-expanded > .ui-options:not(:empty) {
+  pointer-events: auto;
+  transition: all 0.3s, opacity 0.4s;
+  transform: translateX(-50%) translateY(0%);
+  opacity: 1;
+  animation: ui-combobox-options 0.4s 0.2s linear both;
+}
+.ui-combobox.ui-combobox-options-top > .ui-options:not(:empty) {
+  transform: perspective(500px) translateX(-50%) translateY(-200%) rotateX(70deg);
+}
+.ui-combobox.ui-combobox-options-top:not(.ui-combobox-collapsed):hover > .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-top:not(.ui-combobox-collapsed) > .ui-match:not([disabled]):focus ~ .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-top.ui-combobox-expanded > .ui-options:not(:empty) {
+  transform: translateX(-50%) translateY(-100%);
+  animation: ui-combobox-options-top 0.4s 0.2s linear both;
+  margin-top: -2.7em;
+  z-index: 15;
+}
+.ui-combobox.ui-combobox-options-right:not(.ui-combobox-collapsed):hover > .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-right:not(.ui-combobox-collapsed) > .ui-match:not([disabled]):focus ~ .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-right.ui-combobox-expanded > .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-left:not(.ui-combobox-collapsed):hover > .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-left:not(.ui-combobox-collapsed) > .ui-match:not([disabled]):focus ~ .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-left.ui-combobox-expanded > .ui-options:not(:empty) {
+  transform: translateY(0%);
+}
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-left > .ui-options,
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-right > .ui-options {
+  transform: perspective(500px) translateY(-200%) rotateX(70deg);
+}
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-right:not(.ui-combobox-collapsed):hover > .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-right:not(.ui-combobox-collapsed) > .ui-match:not([disabled]):focus ~ .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-right.ui-combobox-expanded > .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-left:not(.ui-combobox-collapsed):hover > .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-left:not(.ui-combobox-collapsed) > .ui-match:not([disabled]):focus ~ .ui-value:not([disabled]) ~ .ui-options:not(:empty),
+.ui-combobox.ui-combobox-options-top.ui-combobox-options-left.ui-combobox-expanded > .ui-options:not(:empty) {
+  transform: translateY(-100%);
+}
+@keyframes ui-combobox-options {
+  0% {
+    margin-top: 1em;
+    z-index: 1;
+  }
+  50% {
+    margin-top: -0.357em;
+  }
+  100% {
+    margin-top: -0.357em;
+    z-index: 15;
+  }
+}
+@keyframes ui-combobox-options-top {
+  0% {
+    margin-top: -1em;
+    z-index: 1;
+  }
+  50% {
+    margin-top: -3.5em;
+  }
+  100% {
+    margin-top: -2.7em;
+    z-index: 15;
+  }
+}
+.ui-combobox > .ui-options > * {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  padding: 0.6em 3em 0.6em 1.0714em;
+}
+.ui-combobox > .ui-options > *:hover {
+  background: #edf6fb;
+}
+.ui-combobox > .ui-options > .separator {
+  display: block;
+  position: relative;
+  background: #ddd;
+  height: 1px;
+  line-height: 0;
+  padding: 0;
+}
+.ui-combobox > .ui-options > :first-child + .separator,
+.ui-combobox > .ui-options > :last-child + .separator {
+  margin: 0.4em 0;
+}
+.ui-combobox > .ui-options > * > * {
+  font-weight: normal;
+  color: #737d85;
+  font-size: 0.875em;
+}
+.ui-combobox > .ui-options > * .ui-checkbox-after,
+.ui-combobox > .ui-options > * .ui-radio-after {
+  position: absolute;
+  right: 1em;
+}
+.ui-combobox > .ui-value .ui-checkbox,
+.ui-combobox > .ui-value .ui-checkbox-after,
+.ui-combobox > .ui-value .ui-radio,
+.ui-combobox > .ui-value .ui-radio-after,
+.ui-combobox > .ui-value input {
+  display: none;
+}
+.ui-combobox > .ui-options {
+  max-height: 15.625em;
+  overflow: hidden;
+}
+.ui-combobox > .ui-options:hover {
+  overflow: auto;
+}
+.ui-combobox.ui-combobox-clean > .ui-value {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px transparent;
+  padding: 0.93em 2em 0.93em 0.6em;
+}
+.ui-combobox.ui-combobox-clean:after {
+  right: 0;
+}
+.ui-combobox.ui-combobox-clean > .ui-options {
+  min-width: 100%;
+}
+.ui-combobox.ui-combobox-clean.ui-combobox-options-left > .ui-options {
+  left: 0;
+}
+.ui-combobox.ui-combobox-clean.ui-combobox-options-right > .ui-options {
+  right: 0;
+}
+.ui-combobox-group {
+  width: 100%;
+  display: inline-table;
+  position: relative;
+  border-radius: 0.214em;
+}
+.ui-combobox-group > .ui-combobox {
+  display: table-cell;
+}
+.ui-combobox-group > .ui-combobox-search {
+  max-width: 0;
+  width: 100%;
+}
+.ui-combobox-group > .ui-combobox:not(:first-child):not(:last-child) > .ui-match,
+.ui-combobox-group > .ui-combobox:not(:first-child):not(:last-child) > .ui-value {
+  border-radius: 0;
+}
+.ui-combobox-group > .ui-combobox:first-child > .ui-match,
+.ui-combobox-group > .ui-combobox:first-child > .ui-value {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ui-combobox-group > .ui-combobox:last-child > .ui-match,
+.ui-combobox-group > .ui-combobox:last-child > .ui-value {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.-webkit- .ui-combobox > .ui-options::-webkit-scrollbar {
+  width: 0.625em;
+  height: 0.625em;
+}
+.-webkit- .ui-combobox > .ui-options::-webkit-scrollbar-thumb {
+  border: 0.1875em solid transparent;
+  border-radius: 0.3125em;
+  background: rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+.-webkit- .ui-combobox > .ui-options:hover::-webkit-scrollbar-thumb {
+  border: 0.1875em solid transparent;
+  background: rgba(0, 0, 0, 0.1);
+  background-clip: padding-box;
+}
+.-webkit- .ui-combobox > .ui-options::-webkit-scrollbar-thumb:horizontal:hover,
+.-webkit- .ui-combobox > .ui-options::-webkit-scrollbar-thumb:vertical:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.-webkit- .ui-combobox > .ui-options::-webkit-scrollbar-thumb:horizontal:active,
+.-webkit- .ui-combobox > .ui-options::-webkit-scrollbar-thumb:vertical:active {
+  background-color: #31a0e7;
+}
+.-webkit- .ui-combobox > .ui-options::-webkit-scrollbar-corner {
+  background: transparent;
+}

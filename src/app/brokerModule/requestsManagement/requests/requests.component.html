@@ -1,0 +1,434 @@
+<app-slid-in-out
+*ngIf="typeOpereation === 'showDetail'"
+class="popup"
+[bgColour]="mybg"
+>
+
+<ngx-view-request   [requestObject]="requestObj" [customerType]="customerTypeEnum"   
+></ngx-view-request>
+
+</app-slid-in-out>
+
+
+
+
+<app-slid-in-out
+*ngIf="typeOpereation === 'addNewRequest' || typeOpereation === 'editRequest'"
+class="popup"
+[bgColour]="mybg"
+>
+<app-create-request
+  (saveRequestOccurred)="updateRequests($event)" [mode]="mode" [requestObject]="requestObj" [customerType]="customerTypeEnum"  (clickedSaveRequest)="SaveRequestsFake($event)" (requestStatusChanged)="requestStatusChanged($event)" (clickedCustomerType)="SetCustomerType($event)"
+></app-create-request>
+</app-slid-in-out>
+
+<div [ngClass]="{ 'fullscreen-inActive': state }">
+<kendo-grid
+    [data]="gridData"
+    (cellClick)="onCellClick($event)"
+    [resizable]="true"
+    [sortable]="{ mode: 'multiple' }"
+    [selectable]="{ mode: 'single' }"
+    (selectionChange)="selected($event)"
+    (sortChange)="sortChange($event)"
+    [sortable]="{
+        allowUnsort: true,
+        mode: 'multiple'
+    }"
+    [sort]="sort"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [pageable]="true"
+    [filter]="filter"
+    (filterChange)="filterChange($event)"
+    [filterable]="true"
+    (pageChange)="pageChange($event)"
+    [height]="815"
+     >
+    <kendo-grid-messages
+        noRecords="رکوردی برای نمایش یافت نشد!"
+        pagerItems="کل رکورد"
+        pagerOf="از"
+        sortAscending="صعودی"
+        sortDescending="نزولی"
+        filter="جستجو"
+        columns="انتخاب سر ستون"
+        columnsApply="اعمال"
+        columnsReset="باز نشانی"
+    >
+    </kendo-grid-messages>
+    <ng-template kendoGridToolbarTemplate>
+        <a
+            class="buttoFlat"
+            (click)="createNewRequest()"
+            type="button">
+            <img    src="../../../../assets/images/new.png" width="24">
+             ایجاد درخواست جدید
+    </a>
+       
+
+
+        <a
+        (click)="refreshAllRequest()"
+        class="buttoFlat"
+
+        type="button"
+    >
+    <img    src="../../../../assets/images/loop.png" width="24">
+
+        به روز رسانی
+    </a>
+
+ 
+
+        <!-- <button
+            class="buttoFlat"
+            kendoGridExcelCommand
+             
+        >
+            خروجی به اکسل
+        </button> -->
+        
+
+    </ng-template>
+
+    <kendo-grid-column
+        field="id"
+        title=" شماره "
+        width="50"
+        [filterable]="false"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+        field="name"
+        title="نـــام"
+        width="150"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+    <kendo-grid-column
+        field="customerType.name"
+        title="نوع مشتری"
+        media="(min-width: 1650px)"
+        width="100"
+        [filterable]="true">
+    </kendo-grid-column>
+
+    <kendo-grid-column title="زمان ایجاد" field="requestCreateDateTime" media="(min-width: 1900px)"  [filterable]="true" width="110">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <span class="myOrginalFont" style="direction: ltr !important" >
+                {{ dataItem.requestCreateDateTime}}
+            </span>
+        </ng-template>
+     </kendo-grid-column>
+
+
+
+
+     <kendo-grid-column
+     field="responseStatus.name"
+     title="وضعیت پاسخ"
+     width="110"
+     media="(min-width: 1450px)"
+     [filterable]="true"
+ >
+ </kendo-grid-column>
+
+
+    <kendo-grid-column
+        field="requestType.name"
+        title="نوع درخواست"
+        width="120"
+        media="(min-width: 1950px)"
+        [filterable]="true"
+    >
+    </kendo-grid-column>
+
+
+    <kendo-grid-column title="وضعیت درخواست" field="requestStatus.name"   [filterable]="true" width="110">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span [class.classActiveRequest]="dataItem.requestStatus.id==1" [class.classSentRequest]="dataItem.requestStatus.id==3 "  
+                [class.classRejectRequest]="dataItem.requestStatus.id==4"  [class.classSupplement]="dataItem.requestStatus.id==6">
+                    {{ dataItem.requestStatus.name }}
+                </span>
+            </ng-template>
+    </kendo-grid-column>
+
+    
+    <!-- <kendo-grid-column title="وضعیت پاسخ" field="responseType.name"   [filterable]="true" width="110">
+            <ng-template kendoGridCellTemplate let-dataItem>
+             
+
+                <span [class.classInProgressRequest]="dataItem.responseType.id==3" >
+                    {{ dataItem.responseType.name }}
+                </span>
+            </ng-template>
+    </kendo-grid-column> -->
+
+    <kendo-grid-column title="زمان پاسخ" field="responseSendDateTime" media="(min-width: 1650px)"  [filterable]="true" width="110">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span  >
+                    {{ dataItem.responseSendDateTime}}
+                </span>
+            </ng-template>
+   </kendo-grid-column>
+
+    <kendo-grid-column field="spotMarket" title="متقاضی نقدی" width="90" media="(min-width: 1350px)"  [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <input type="checkbox" [checked]="dataItem.spotMarket" disabled/>
+            </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="derivativesMarket" title="متقاضی مشتقه" media="(min-width: 1350px)" width="105"  [filterable]="false">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <input type="checkbox"  [checked]="dataItem.derivativesMarket" disabled/>
+                </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column field="" title="عملیات چاپ" width="175"   [filterable]="false">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="row" style="margin-right: 1px " kendoTooltip>
+  
+                <ngx-combo-button (comboItemClick)="comboItemClicked($event)"  [watingForGetPdf]="watingForGetPdf &&  !checkIsSelectedRowForOperation(dataItem.id)"
+                [collections]=listCollections [isClicked]=isClicked [disabledCtrl]="checkIsSelectedRowForOperation(dataItem.id,false) &&  !checkIsSelectedRowForOperation(dataItem.id)">
+         
+            </ngx-combo-button>
+            </div>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="عملیات" width="235" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <div class="row" style="margin-right: 1px " kendoTooltip>
+                    <button
+                        nbTooltip="نمایش پاسخ" nbTooltipStatus="primary"
+                        type="button"
+                        nbButton outline
+                        (click)="showDescription()"
+                        [disabled]="checkIsSelectedRowForOperation(dataItem.id,false)"
+                        class="btn btn-primary  btn-circle btnBlack"
+                    >
+                        <i class="fa fa-ellipsis-h"></i>
+                    </button>
+
+                    
+
+                    <button
+                        nbTooltip="ارسال" nbTooltipStatus="success"
+                        type="button"
+                        nbButton  outline
+                        status="success"
+                        (click)="openConfirmSendRequestModal()"
+                        class="btn btn-success  btn-circle btnBlack"
+                        [disabled]="checkIsSelectedRowForOperationUploadDocuments(dataItem.id)">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+
+
+              
+
+                    <button
+                       nbTooltip="ویرایش" nbTooltipStatus="warning"
+                        type="button"
+                        nbButton  outline
+                        (click)="editRequest()"
+                        status="warning"
+                        class="btn  btn-warning btn-circle btnBlack"
+                        [disabled]="checkIsSelectedRow(dataItem.id) || editInProgress">
+                        <i class="fa fa-wrench"></i>
+                        <span [ngClass]="{'spinner-grow spinner-grow-sm':editInProgress  &&  !checkIsSelectedRowForOperation(dataItem.id)}"   ></span>
+                    </button>
+
+
+                    <button nbTooltip="حذف" nbTooltipStatus="danger"
+                    type="button"
+                    nbButton  outline
+                    status="danger"
+                    class="myOrginalFont btn btn-danger  btn-circle btnBlack"
+                    (click)="openConfirmDeleteModal()"
+                    [disabled]="checkIsSelectedRow(dataItem.id)">
+                    <i class="fa fa-trash"></i>
+                </button>
+
+                <!-- <button
+                nbTooltip="چاپ" nbTooltipStatus="primary"
+                type="button"
+                nbButton outline
+                (click)="exportPdf()"
+                [disabled]="watingForGetPdf || checkIsSelectedRowForOperation(dataItem.id)"
+                class=" btn   btn-secondary btn-circle btnBlack" >
+                <i  [ngClass]="{'fa fa-print': !watingForGetPdf}" class=""></i>
+                <span [ngClass]="{'spinner-grow spinner-grow-sm': watingForGetPdf &&  !checkIsSelectedRowForOperation(dataItem.id)}"   ></span>
+            </button> -->
+
+                    <button
+                    nbTooltip="مشاهده درخواست" nbTooltipStatus="success"
+                    type="button"
+                    nbButton  outline
+                    (click)="showRequestDetails(dataItem.id)"
+                    status="success"
+                    class="btn  btn-success btn-circle btnBlack"
+                    
+                    [disabled]="checkIsSelectedRowForOperation(dataItem.id) || viewInProgress"
+                >
+                    <i class="fa fa-eye"></i>
+                    <span [ngClass]="{'spinner-grow spinner-grow-sm':viewInProgress  &&  !checkIsSelectedRow(dataItem.id)}"   ></span>
+                </button>
+           
+                    <button
+                    nbTooltip="مدیریت اسناد" nbTooltipStatus="warning"
+                    type="button"
+                    nbButton outline
+                    status="warning"
+                    (click)="goToDocumentsManagement(dataItem.id,dataItem)"
+                    [disabled]="checkIsSelectedRowForOperationUploadDocuments(dataItem.id)"
+                    class="btn  btn-warning btn-circle btnBlack" >
+                    <!-- <img    src="../../../../assets/images/dc.png" width="24"> -->
+                    <i     class="fa fa-upload"></i>
+                </button>
+                </div>
+
+      
+                <ng-template
+                    kendoPagerTemplate
+                    let-totalPages="totalPages"
+                    let-currentPage="currentPage">
+                    <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+                    <kendo-pager-numeric-buttons
+                        [buttonCount]="12"
+                    ></kendo-pager-numeric-buttons>
+                    <kendo-pager-info></kendo-pager-info>
+                    <kendo-pager-next-buttons></kendo-pager-next-buttons>
+                    <kendo-pager-page-sizes
+                        [pageSizes]="[12, 120, 240]"
+                    ></kendo-pager-page-sizes>
+                </ng-template>
+            </ng-template>
+        </kendo-grid-column>
+
+    
+    <kendo-grid-excel
+        fileName="request.xlsx"
+        [fetchData]="allData"
+    ></kendo-grid-excel>
+</kendo-grid>
+
+<div *ngIf="loadingGrid " class="k-i-loading"></div>
+
+
+</div>
+
+
+
+<div class="row">
+    <modal #contentTemplate  >
+        <modal-header >
+            <h4 class="myOrginalFont"><nb-icon status="info" icon="bulb-outline"></nb-icon> اطلاعیه درخواست</h4>
+        </modal-header>
+        <modal-content>
+                <p class="myOrginalFont">  {{ selectedRequestItemResult==null?'': selectedRequestItemResult.responseDescription }}</p>
+        </modal-content>
+        <modal-footer> 
+            
+        </modal-footer>
+    </modal>
+</div>
+
+
+<div class="row">
+<modal #deleteModal  >
+    <modal-header >
+        <h3  class="myOrginalFont"><nb-icon status="basic" icon="alert-triangle-outline"></nb-icon>  هشـــدار</h3>
+    </modal-header>
+    <modal-content>
+        آیا از حذف درخواست مطمئن می باشید؟
+    </modal-content>
+    <modal-footer> 
+        <button nbButton status="success" class="myOrginalFont dialog-Btn" (click)="deleteSelectedRequest()"  [ngClass]="{'m-progress':sendDataToServer}">تایید<nb-icon icon="done-all-outline"></nb-icon></button>
+         <button nbButton  status="danger" (click)="closeModal()" class="myOrginalFont dialog-Btn">انصراف<nb-icon icon="close-outline"></nb-icon></button>
+    </modal-footer>
+</modal>
+</div>
+
+<div class="row">
+    <modal #sendModal  >
+        <modal-header >
+                <h3  class="myOrginalFont"><nb-icon status="basic" icon="alert-triangle-outline"></nb-icon>  هشـــدار</h3>
+        </modal-header>
+        <modal-content>
+            پس از ارسال درخواست امکان تغییر درخواست نمی باشد، آیا از ارسال درخواست مطمئن می باشید؟
+        </modal-content>
+        <modal-footer> 
+            <button nbButton status="success" class="myOrginalFont dialog-Btn " [ngClass]="{'m-progress':sendDataToServer}" (click)="sendRequestToServer()" >تایید<nb-icon icon="done-all-outline"></nb-icon></button>
+             <button nbButton  status="danger" (click)="closeModal()" class="myOrginalFont dialog-Btn">انصراف<nb-icon icon="close-outline"></nb-icon></button>
+        </modal-footer>
+    </modal>
+</div>
+
+<div class="row">
+    <modal #assignModal  >
+        <modal-header >
+                <h5  class="myOrginalFont"><nb-icon status="basic" icon="alert-triangle-outline"></nb-icon>  درخواست افزودن</h5>
+        </modal-header>
+        <modal-content >
+            <p  class="myOrginalFont">
+                 
+                با شناسه {{assignRequestResult.externalId }} مشتری {{assignRequestResult.name}} یافت شد! آیا مایل به ایجاد درخواست افزودن می باشید؟
+            </p>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                    <div class="can-toggle disActive">
+                            <input id="b" type="checkbox"  checked  class="disActive" >
+                            <label for="b">
+                            <div class="can-toggle__label-text disActive" style="color: #263a23e0;">متقاضی بازار نقدی</div>
+
+                            <div class="can-toggle__switch disActive" data-checked="بلی" data-unchecked="خیر"></div>
+                            </label>
+                     </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                    <div class="can-toggle disActive">
+                            <input id="a" type="checkbox"  class="disActive" >
+                            <label for="a">
+                            <div class="can-toggle__label-text disActive" style="color: #263a23e0; ">متقاضی بازار مشتقه</div>
+
+                            <div class="can-toggle__switch disActive" data-checked="بلی" data-unchecked="خیر"></div>
+                            </label>
+                     </div>
+                </div>
+
+                </div>
+
+        </modal-content>
+        <modal-footer> 
+            <button nbButton status="success" class="myOrginalFont dialog-Btn " [ngClass]="{'m-progress':sendDataToServer}" (click)="sendAssignRequestToServer()" >ذخیره پیش‌نویس<nb-icon icon="done-all-outline"></nb-icon></button>
+             <button nbButton  status="danger" (click)="closeModal()" class="myOrginalFont dialog-Btn">انصراف<nb-icon icon="close-outline"></nb-icon></button>
+        </modal-footer>
+    </modal>
+</div>
+
+
+<div class="row">
+    <modal #removeModal  >
+        <modal-header >
+                <h5  class="myOrginalFont"><nb-icon status="basic" icon="alert-triangle-outline"></nb-icon>  درخواست افزودن</h5>
+        </modal-header>
+        <modal-content >
+            <p  class="myOrginalFont">
+                 
+                با شناسه {{assignRequestResult.externalId }} مشتری {{assignRequestResult.name}} یافت شد! آیا مایل به ایجاد درخواست حذف مشتری می باشید؟
+            </p>
+ 
+        </modal-content>
+        <modal-footer> 
+             <button nbButton status="success" class="myOrginalFont dialog-Btn " [ngClass]="{'m-progress':sendDataToServer}" (click)="sendRemoveRequestToServer()" >ذخیره پیش‌نویس<nb-icon icon="done-all-outline"></nb-icon></button>
+             <button nbButton  status="danger" (click)="closeModal()" class="myOrginalFont dialog-Btn">انصراف<nb-icon icon="close-outline"></nb-icon></button>
+        </modal-footer>
+    </modal>
+</div>
+
+ 

@@ -1,0 +1,180 @@
+<form  [formGroup]="requestForm" class="simple-form container" (keyup.enter)="onSubmit()"  (ngSubmit)="onSubmit()">
+  <div class="panel panel-info">
+      <div class="panel-heading clearfix">
+          <i class="icon-calendar"></i>
+          <h3 class="panel-title"></h3>
+      </div>
+
+      <div class="card-bodys">
+
+          <div class="row">
+              <div class="col-lg-6 col-sm-12">
+               
+                      <div class="input-group"> 
+                             <div class="input-group-prepend">
+                                  <span class="input-group-text spanGrp spanSmall">  Name</span>
+                             </div>
+                         <input type="text" formControlName="firstName"    [(ngModel)]="personalDetailsInformation.firstName"
+                         required class="form-control inputGrp"   />
+                     </div>
+
+                       <div *ngIf="submitted &&  ctrl?.firstName?.errors" class="invalid-feedback">
+                               <div *ngIf="submitted && ctrl?.firstName?.errors?.required" class="fontColorError">Name is required</div>
+                       </div>
+              </div>
+
+              <div class="col-lg-6 col-sm-12">
+                 
+                     <div class="input-group">
+                             <div class="input-group-prepend">
+                                  <span class="input-group-text spanGrp spanSmall"> Surname</span>
+                             </div>
+                         <input type="text" formControlName="lastName" [(ngModel)]="personalDetailsInformation.lastName"  ngxOnlyPersianChars  required class="form-control inputGrp" />
+                     </div>
+
+             
+                          <div *ngIf="submitted && ctrl?.lastName?.errors" class="invalid-feedback">
+                                   <div *ngIf="submitted && ctrl?.lastName?.errors?.required" class="fontColorError">Surname is required</div>
+                           </div>
+                  </div>
+              </div>
+
+          <br />
+
+
+          <div class="row">
+
+
+             <div class="col-lg-6 col-sm-12">
+
+               
+
+                     <div class="input-group">
+                             <div class="input-group-prepend">
+                                  <span class="input-group-text spanGrp spanSmall">  Birth ID No.</span>
+                             </div>
+                         <input type="text" formControlName="identificationNumber"  [(ngModel)]="personalDetailsInformation.identificationNumber"  [imask]="{mask: '0000000000000'}" required  class="form-control inputGrp numberDirection" />
+                     </div>
+
+                     <div *ngIf="submitted && ctrl?.identificationNumber?.errors" class="invalid-feedback">
+                              <div *ngIf="submitted && ctrl?.identificationNumber?.errors?.required" class="fontColorError">فیلد شماره شناسنامه الزامی است</div>
+                      </div>
+             </div>
+
+             <div class="col-lg-6 col-sm-12">
+
+               
+
+              <div class="input-group">
+                      <div class="input-group-prepend">
+                           <span class="input-group-text spanGrp spanSmall">  Passport No.</span>
+                      </div>
+                  <input type="text" formControlName="identificationNumber"  [(ngModel)]="personalDetailsInformation.identificationNumber"  [imask]="{mask: '0000000000000'}" required  class="form-control inputGrp numberDirection" />
+              </div>
+
+              <div *ngIf="submitted && ctrl?.identificationNumber?.errors" class="invalid-feedback">
+                       <div *ngIf="submitted && ctrl?.identificationNumber?.errors?.required" class="fontColorError">Passport No is required</div>
+               </div>
+      </div>
+
+          </div>
+          <br />
+             <div class="row">
+
+                 <div class="col-lg-6 col-sm-12">
+
+                     <div class="input-group">
+
+                             <div class="input-group">
+                                     <div class="input-group-prepend">
+                                          <span class="input-group-text spanGrp spanSmall"> Nationality</span>
+                                     </div>
+                                 <app-country-combo-box class="width60" [(ngModel)]="personalDetailsInformation.nationality"  required  formControlName="nationality"></app-country-combo-box>
+                                  
+                             </div>
+
+
+                             <div *ngIf="submitted && ctrl?.registerCity?.errors" class="invalid-feedback">
+                                     <div *ngIf="submitted && ctrl?.registerCity?.errors?.required" class="fontColorError">Nationality is required</div>
+                              </div>
+                 </div>
+                 </div>
+
+                 <div class="col-lg-6 col-sm-12">
+
+
+                     <div class="input-group">
+
+
+                             <div class="input-group">
+                                     <div class="input-group-prepend">
+                                          <span class="input-group-text spanGrp spanSmall">Tax Identification No.</span>
+                                     </div>
+                             </div>
+
+                             <input type="text" formControlName="identificationNumber"  [(ngModel)]="personalDetailsInformation.identificationNumber"  [imask]="{mask: '0000000000000'}" required  class="form-control inputGrp numberDirection" />
+
+                             <div *ngIf="submitted && ctrl?.nationality?.errors" class="invalid-feedback">
+                                     <div *ngIf="submitted && ctrl?.nationality?.errors?.required" class="fontColorError">Tax Identification No is required</div>
+                              </div>
+                 </div>
+                 </div>
+
+              </div>
+              <br />
+
+
+          <div class="row">
+                 <div class="col-lg-6 col-sm-12">
+
+
+                     <div class="input-group">
+
+                             <div class="input-group">
+                                     <div class="input-group-prepend">
+                                          <span class="input-group-text spanGrp spanSmall">Sex</span>
+                                     </div>
+                                     <app-gender-combo-box class="width60" [(ngModel)]="personalDetailsInformation.gender"  required  formControlName="gender"></app-gender-combo-box>
+                             </div>
+
+                             <div *ngIf="submitted && ctrl?.gender?.errors" class="invalid-feedback">
+                                     <div *ngIf="submitted && ctrl?.gender?.errors?.required" class="fontColorError">Sex type is required</div>
+                              </div>
+                     </div>
+                 </div>
+  
+          </div>
+
+             <br />
+
+
+
+
+      </div>
+      <br />
+
+  
+
+
+
+      <div class="row">
+ 
+             <div class="col-xs-6 col-md-6">
+                 <a (click)="onPrevious()" class="btn btn-danger btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                    Previous Step</a>
+             </div>
+
+             <div class="col-xs-6 col-md-6">
+                     <a
+                         (click)="onSubmit()"
+                         [ngClass]="{ 'not-active': !requestForm.valid }"
+ 
+                         class="btn btn-success btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                         Next Step
+                 </a>
+                 </div>
+     </div>
+
+      <br />
+      </div>
+      </form>

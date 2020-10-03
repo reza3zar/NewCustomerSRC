@@ -1,0 +1,17 @@
+<kendo-combobox
+    [data]="dataCollection"
+    [textField]="'value'"
+    [valueField]="'id'"
+    [filterable]="true"
+    (filterChange)="handleFilter($event)"
+    name="value"
+    [(ngModel)]="value"
+    style="width: 100%;"
+    [placeholder]="'انتخاب کنید'"
+    [loading]="this.dataCollection.length==0"
+>
+
+<ng-template kendoComboBoxItemTemplate let-dataItem class="myOrginalFont">
+        <span   class="myOrginalFont">{{ dataItem.value }}</span> 
+</ng-template>
+</kendo-combobox>

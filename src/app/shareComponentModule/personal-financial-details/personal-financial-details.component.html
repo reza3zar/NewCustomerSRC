@@ -1,0 +1,179 @@
+<div class="card-body">
+ 
+<form  [formGroup]="requestForm" class="simple-form container" (keyup.enter)="onSubmit()"  (ngSubmit)="onSubmit()">
+         <div class="panel panel-info">
+    
+
+             <div class="panel-body">
+
+                 <div class="row">
+
+                                <div class="col-lg-6 col-sm-12">
+                                        <div class="can-toggle"  >
+                                                <input id="b" type="checkbox" formControlName="isAuctionMarket"  [(ngModel)]="financialDetail.isSpotMarket">
+                                                <label for="b">
+                                                <div class="can-toggle__label-text" style="font-size: smaller">  متقاضی بازار فیزیکی ؟</div>
+        
+                                                <div class="can-toggle__switch" data-checked="بلی" data-unchecked="خیر"></div>
+                                                </label>
+                                         </div>
+                                    </div>
+        
+        
+        
+                                    <div class="col-lg-6 col-sm-12">
+                                            <div class="can-toggle"  >
+                                                    <input id="c" type="checkbox" formControlName="isFutureMarket"  [(ngModel)]="financialDetail.isFutureMarket">
+                                                    <label for="c">
+                                                    <div class="can-toggle__label-text" style="font-size: small"> متقاضی بازار مشتقه ؟</div>
+        
+                                                    <div class="can-toggle__switch" data-checked="بلی" data-unchecked="خیر"></div>
+                                                    </label>
+                                             </div>
+                                        </div>
+        
+        
+        
+                         </div>
+
+                 <br />
+
+
+                 <div class="row">
+           
+ 
+
+                   <div class="col-lg-6 col-sm-12">
+
+                                    
+
+
+                                                <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                     <span class="input-group-text spanGrp numberDirection smallFont"> پیش بینی بازار فیزیکی </span>
+                                                                </div>
+                                                                <input type='text'  [disableControl]="!financialDetail.isSpotMarket"   [imask]="{mask: '0000000000000'}" class="form-control"  formControlName="predictContractValueINAuctionMarket"
+                                                                [(ngModel)]="financialDetail.predictContractValueInSpotMarket"   required  class="disable form-control inputGrp numberDirection"/>
+                                                </div>
+
+                                                     
+                                                <div *ngIf="submitted && ctrl.predictContractValueINAuctionMarket.errors" class="invalid-feedback">
+                                                         <div *ngIf="submitted && ctrl.predictContractValueINAuctionMarket.errors.required" class="fontColorError">فیلد پیش بینی بازار فیزیکی الزامی است</div>
+                                                 </div>
+                                        </div>
+                                        <!-- predictContractValueInSpotMarket
+                                        predictContractValueInFutureMarket -->
+                                        <div class="col-lg-6 col-sm-12">
+
+                                                        <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                         <span class="input-group-text spanGrp  smallFont"> پیش بینی بازار مشتقه </span>
+                                                                    </div>
+                                                                    <input type='text'  [disableControl]="!financialDetail.isFutureMarket"  [imask]="{mask: '0000000000000'}" class="form-control"  formControlName="predictContractValueINFutureMarket"
+                                                                    [(ngModel)]="financialDetail.predictContractValueInFutureMarket"   required  class="disable form-control inputGrp numberDirection"/>
+                                                         </div>
+                    
+                    
+                                                        <div *ngIf="submitted && ctrl.predictContractValueINFutureMarket.errors" class="invalid-feedback">
+                                                                 <div *ngIf="submitted && ctrl.predictContractValueINFutureMarket.errors.required" class="fontColorError">فیلد پیش بینی بازار مشتقه الزامی است</div>
+                                                         </div>
+                                                </div>
+                 </div>
+
+
+                 </div>
+
+                 <br/>
+
+                 <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+           
+                                        <div class="input-group">
+                                                   <div class="input-group-prepend">
+                                                        <span class="input-group-text spanGrp smallFont">  ارزش روز دارایـــــــی </span>
+                                                   </div>
+                                                   <input type='text'  [imask]="{mask: '0000000000000'}" class="form-control"  formControlName="ownerShipValue" [(ngModel)]="financialDetail.ownerShipValue"
+                                                   required class="form-control inputGrp numberDirection"   />
+            
+                                           </div>
+                                         <p class="fontColorError myOrginalFont">{{errorMinRecord}}</p>
+
+                                         <div *ngIf="submitted &&  ctrl.ownerShipValue.errors" class="invalid-feedback">
+                                                 <div *ngIf="submitted && ctrl.ownerShipValue.errors.required" class="fontColorError">فیلد ارزش دارایی الزامی است</div>
+                                         </div>
+                                </div>
+           
+           
+                                <div class="col-lg-6 col-sm-12">
+                                           <div class="input-group">
+                                                           <div class="input-group-prepend">
+                                                                <span class="input-group-text spanGrp smallFont">  متوسط درآمد ماهیانه </span>
+                                                           </div>
+                                                           <input type='text'  [imask]="{mask: '0000000000000'}" class="form-control"  formControlName="averageSalaryPermonths"
+                                                           [(ngModel)]="financialDetail.averageSalaryPerMonth"   required  class="form-control inputGrp numberDirection"/>
+                    
+                                            </div>
+           
+                                           <div *ngIf="submitted && ctrl.averageSalaryPermonths.errors" class="invalid-feedback">
+                                                    <div *ngIf="submitted && ctrl.averageSalaryPermonths.errors.required" class="fontColorError">فیلد متوسط دارایی الزامی است</div>
+                                            </div>
+                                   </div>
+           
+                </div>
+           
+                            <br />
+
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+           
+                                        <div class="input-group">
+                                                   <div class="input-group-prepend">
+                                                        <span class="input-group-text spanGrp smallFont">واحـــد پـــولــــــی</span>
+                                                   </div>
+                                                   <ngx-currency  class="width60"  formControlName="currency" [(ngModel)]="financialDetail.currency"
+                                                   required    ></ngx-currency>
+            
+                                           </div>
+                                         <!-- <p class="fontColorError myOrginalFont">{{errorMinRecord}}</p>
+
+                                         <div *ngIf="submitted &&  ctrl.ownerShipValue.errors" class="invalid-feedback">
+                                                 <div *ngIf="submitted && ctrl.ownerShipValue.errors.required" class="fontColorError">فیلد ارزش دارایی الزامی است</div>
+                                         </div> -->
+                                </div>
+           
+           
+                                <div class="col-lg-6 col-sm-12">
+                              
+                                   </div>
+           
+                </div>
+
+                <br/>
+
+            
+             <br />
+
+            <div class="row">
+
+                        <div class="col-xs-6 col-md-6">
+                                        <a (click)="onPrevious()" class="btn btn-danger btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                                           مرحله قبل</a>
+                                    </div>
+
+
+                        <div class="col-xs-6 col-md-6">
+                            <a
+                                (click)="onSubmit()"
+                         [ngClass]="{ 'not-active': !requestForm.valid }"
+
+                                class="btn btn-success btn-block btn-lg text-dark"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                                مرحله بعد
+                        </a>
+                        </div>
+             
+                </div>
+
+            <br />
+
+             </div>
+             </form>

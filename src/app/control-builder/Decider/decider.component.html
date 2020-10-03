@@ -1,0 +1,27 @@
+<div class="form-group row"   [formGroup]="form">
+    <!-- *ngIf="inputControl.visible!==false" -->
+  <div class="col-md-12" [ngSwitch]="inputControl.type">
+  <div class="row col-md-12">
+  <label style="color:black" *ngIf="inputControl.type!='collection'"   [ngStyle]="{'display':inputControl.visible !== true ? 'none' : 'inline' }" for="{{inputControl.name}}">{{inputControl.label}}</label>
+  <label [ngStyle]="{'display':inputControl.visible !== true ? 'none' : 'inline' }" *ngIf="inputControl.required==='required'"   style="color:red">*</label>
+  </div>
+    <textbox *ngSwitchCase="'text'"  [controlValues]="inputControl" [form]="form"></textbox>
+    <dateFarsiTextBox *ngSwitchCase="'dateFarsiTextBox'"  [controlValues]="inputControl" [form]="form"></dateFarsiTextBox>
+    <textareas *ngSwitchCase="'textareas'"  [controlValues]="inputControl" [form]="form"></textareas>
+    <money *ngSwitchCase="'money'"  [controlValues]="inputControl" [form]="form"></money>
+    <dropdown *ngSwitchCase="'dropdown'" (onSelectedItemChanged)="selectedItemChanged($event)"  [controlValues]="inputControl" [form]="form"></dropdown>
+    <radio *ngSwitchCase="'radio'"  [controlValues]="inputControl" [form]="form"></radio>
+    <masktextbox *ngSwitchCase="'masktextbox'"  [controlValues]="inputControl" [form]="form"></masktextbox>
+    <number *ngSwitchCase="'number'"  [controlValues]="inputControl" [form]="form"></number>
+    <textbox *ngSwitchCase="'password'"  [controlValues]="inputControl" [form]="form"></textbox>
+    <datepeickerfa *ngSwitchCase="'datefa'"  [controlValues]="inputControl" [form]="form"></datepeickerfa>
+    <gridCollection *ngSwitchCase="'collection'"  [controlValues]="inputControl" [form]="form"></gridCollection>
+    <checkbox *ngSwitchCase="'checkbox'"  [controlValues]="inputControl" [form]="form"></checkbox>
+
+ 
+  </div>
+</div>
+
+
+
+
